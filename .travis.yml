@@ -3,6 +3,11 @@ jdk:
   - openjdk8
 services:
   - docker  
+# env:
+#   global:
+#     secure: IMAGE_NAME
+#     secure: DOCKER_USER
+#     secure: DOCKER_PASS
 env:
   global:
     - CODECOV_TOKEN=45174070-06b4-44b1-a855-30da3c75c37e
