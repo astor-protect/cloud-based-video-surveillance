@@ -2,12 +2,7 @@ language : java
 jdk:
   - openjdk8
 services:
-  - docker
-
-
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
-  
+  - docker  
 env:
   global:
     - CODECOV_TOKEN=45174070-06b4-44b1-a855-30da3c75c37e
@@ -15,3 +10,6 @@ env:
     - secure: "m+66dR83RWtzta20ix95h/W3rCg1C5R4yMxyi7nQ7L47pPmIo+deo+FUWRV0fYSN0Q721H8bb/vfMrrpjmaiWrAkgBWAU5Yp/8Y+Nc1yPGsGFiV4LjvbqFmYZy/Q1OegKO4pY0/7IEJhEQIoUOCIJPe/k8ofaV2XSDvtvu3LidRuUBEMMDUr+B3VuobdW+6Ui5qxxuKp5P47Etq6411WmGGqr1SycGL1uFPNmbzECXMYXAfOp4fSGIxh1fJw/BGSOQIsUcVh+hE1uMgUukmjutwUP2NYRSnxngOn3F/y+Y9Ujvguapv/49sJXKoZad5JHIs+eoSILBVybxdiD3KDXwE7mrGz8YeYFK2Citgi/mcqubTKAybi6HVcGvhekm3FUIAEXYyckKHnh9viIyCJY68tlh0poHM3GSVLRDAJZPqR1leu0DnyFcW39M2EB/X/zs2YGV8Y8ZtyVFtdkgd2w+Kt5u//JZRbKVh9RUcC4mRbbvTYJwLOff5zUQZ6DE5XXz1nYxTxBkQpcjdx7tBv6krW86BPu0/WjrRkzBBHJEtYm+T4jg5t4i4E+m85Zex3fCvQdX51ZIYie6uSACvuB0DErR/CChlay1JQqvXdod/xMp87LA9SfGAGUEAc9o2/BOD/dX08hsjCWAj9VkNGUcWq+S4rKH5Sg0FoLovQ6jU="
     #DOCKER_PASS
     - secure: "uG52cmjS8x4u8ZikUrIalyJEifxggl3svn3MFxJ3G7CApSW+BYYNOO6IZ2w6viCJSM3Ymd6cZEMUrCavFK3d05Rr+rVG/Ea1UuxT/FES7kSe99T6OYP8mELcMqUh11lvz2+cWIUfBLbVvFzB03DTMhn9XvGit4FmPH0lAKDLzMXMaAdJ5R4xOw3k146U+hrlQU7XWBgRmmko40vwuOnaXykh7wbh3GLZzrpphsjxT1+Hq8503jS8Fw3JDV+gS46jblTSOLwdBlEwqcdToU90S6hf9EtZAjrgNCbdQ9N/dtGVVrq2LWLgYf3hW8xgzqIsWoA0OX17+vbcmf8BqiujHB1mTA082ICQ7NjK5kjrEjYJfKo+NtpMHyYxhyg2UiS2t67dKbNm9/yTEcMbdoZnmthHoS3BSKyg/YPeaRBDRxQz7ihurhuJsMpsan3o2+lyImfRlY74v3Ajzf912EkDG76271uVESvBsoZty4Aaw/LhGwantZQKE5sXPepxvkLzuoZsqwR9V5RAV2iFzQuU9985Jb4b8jFN3RIOAAtwqWmcxg18n954W0WFKyJ7HFnl/4HdBvk8+YFXwMYcwgfCqlaVKodNjvweNcDUvhXK1TOTi9S29aLY0awlhf3rYVbZLQFGpIJMs/etpySwC7Ex44sZTCSPUJIZuZxGXaIwmWQ="
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
