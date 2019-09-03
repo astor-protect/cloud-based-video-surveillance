@@ -13,5 +13,17 @@ env:
     #DOCKER_PASS
     - secure: "uG52cmjS8x4u8ZikUrIalyJEifxggl3svn3MFxJ3G7CApSW+BYYNOO6IZ2w6viCJSM3Ymd6cZEMUrCavFK3d05Rr+rVG/Ea1UuxT/FES7kSe99T6OYP8mELcMqUh11lvz2+cWIUfBLbVvFzB03DTMhn9XvGit4FmPH0lAKDLzMXMaAdJ5R4xOw3k146U+hrlQU7XWBgRmmko40vwuOnaXykh7wbh3GLZzrpphsjxT1+Hq8503jS8Fw3JDV+gS46jblTSOLwdBlEwqcdToU90S6hf9EtZAjrgNCbdQ9N/dtGVVrq2LWLgYf3hW8xgzqIsWoA0OX17+vbcmf8BqiujHB1mTA082ICQ7NjK5kjrEjYJfKo+NtpMHyYxhyg2UiS2t67dKbNm9/yTEcMbdoZnmthHoS3BSKyg/YPeaRBDRxQz7ihurhuJsMpsan3o2+lyImfRlY74v3Ajzf912EkDG76271uVESvBsoZty4Aaw/LhGwantZQKE5sXPepxvkLzuoZsqwR9V5RAV2iFzQuU9985Jb4b8jFN3RIOAAtwqWmcxg18n954W0WFKyJ7HFnl/4HdBvk8+YFXwMYcwgfCqlaVKodNjvweNcDUvhXK1TOTi9S29aLY0awlhf3rYVbZLQFGpIJMs/etpySwC7Ex44sZTCSPUJIZuZxGXaIwmWQ="
 
+before_install:
+  - docker pull openjdk:8-jdk-alpine
+  
+script:
+  - mvn site
+  - mvn test
+  - mvn clean package
+
 after_success:
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  - docker build
+  - docker tag $IMAGE_NAME:latest $IMAGE_NAME:$TAG
+  - docker push $IMAGE_NAME:$TAG
   - bash <(curl -s https://codecov.io/bash)
