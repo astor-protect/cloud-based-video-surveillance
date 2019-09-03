@@ -3,21 +3,11 @@ jdk:
   - openjdk8
 services:
   - docker  
-# env:
-#   global:
-#     secure: IMAGE_NAME
-#     secure: DOCKER_USER
-#     secure: DOCKER_PASS
+
 env:
   global:
     - CODECOV_TOKEN=45174070-06b4-44b1-a855-30da3c75c37e
-    #IMAGE_NAME
-    - secure: meGrd198JRqCdIT4btalJyEFDpkX9xs6Dunp6OEB9DjjwsiYDymVwBH8VlaGM5znAOQAH5NJcNHONwH/MblkYaIvBaGUHXAwYrAPEAOSdlVm3O0y2XMnw2RECH6iqxKLysGSuA0vkalCg7kAaHeJzdjFknEWVOd755aqvphbU+nul04RottLaxOVHIFzsVIS+mb/24UY+kJELAV7blJ4mOaJyVaE358PJd8YSO2IfNgKmvEtSZ2y5Sa8+40npmF9CU5uhnIOzSvMvKP5NspB15kZ/1mnO50XqWEp2riOcDZMKxk45RnHq3kb3E3IkS+ZS3ZMboHMvnrg5RmPXkCBtskhG4faulEqd44aSnyQn3Air4wNA3sSfguJG/jYceUjIpTz9mKKJhLwEECvnmvz0wd6WKt6aB/o6KMeAaTURuFnkGnpKt9QfF/YEpn5kWAjC62ZkWzAWSIcoqmhAh2uO0GCs0waszejt8XTKqF/WMWUGpS+DKFpXuvBJQq39kXzkAU3ECJaYbb5aqXcV/eq+429tdJxuBwazgikVVe1sc7QbHusj1nsgkTMO4fuGCshaTjsG/HEQS5+IPqBVR1I/fA5uIpwT+S0ySRAG25vfUDu9BigKoBJu3+kkhR8PKHjpIKm3GiXS0+X7UaTOIgixoeRiWbvJdznltz8h94LbHQ=
-    #DOCKER_USER
-    - secure: m+66dR83RWtzta20ix95h/W3rCg1C5R4yMxyi7nQ7L47pPmIo+deo+FUWRV0fYSN0Q721H8bb/vfMrrpjmaiWrAkgBWAU5Yp/8Y+Nc1yPGsGFiV4LjvbqFmYZy/Q1OegKO4pY0/7IEJhEQIoUOCIJPe/k8ofaV2XSDvtvu3LidRuUBEMMDUr+B3VuobdW+6Ui5qxxuKp5P47Etq6411WmGGqr1SycGL1uFPNmbzECXMYXAfOp4fSGIxh1fJw/BGSOQIsUcVh+hE1uMgUukmjutwUP2NYRSnxngOn3F/y+Y9Ujvguapv/49sJXKoZad5JHIs+eoSILBVybxdiD3KDXwE7mrGz8YeYFK2Citgi/mcqubTKAybi6HVcGvhekm3FUIAEXYyckKHnh9viIyCJY68tlh0poHM3GSVLRDAJZPqR1leu0DnyFcW39M2EB/X/zs2YGV8Y8ZtyVFtdkgd2w+Kt5u//JZRbKVh9RUcC4mRbbvTYJwLOff5zUQZ6DE5XXz1nYxTxBkQpcjdx7tBv6krW86BPu0/WjrRkzBBHJEtYm+T4jg5t4i4E+m85Zex3fCvQdX51ZIYie6uSACvuB0DErR/CChlay1JQqvXdod/xMp87LA9SfGAGUEAc9o2/BOD/dX08hsjCWAj9VkNGUcWq+S4rKH5Sg0FoLovQ6jU=
-    #DOCKER_PASS
-    - secure: uG52cmjS8x4u8ZikUrIalyJEifxggl3svn3MFxJ3G7CApSW+BYYNOO6IZ2w6viCJSM3Ymd6cZEMUrCavFK3d05Rr+rVG/Ea1UuxT/FES7kSe99T6OYP8mELcMqUh11lvz2+cWIUfBLbVvFzB03DTMhn9XvGit4FmPH0lAKDLzMXMaAdJ5R4xOw3k146U+hrlQU7XWBgRmmko40vwuOnaXykh7wbh3GLZzrpphsjxT1+Hq8503jS8Fw3JDV+gS46jblTSOLwdBlEwqcdToU90S6hf9EtZAjrgNCbdQ9N/dtGVVrq2LWLgYf3hW8xgzqIsWoA0OX17+vbcmf8BqiujHB1mTA082ICQ7NjK5kjrEjYJfKo+NtpMHyYxhyg2UiS2t67dKbNm9/yTEcMbdoZnmthHoS3BSKyg/YPeaRBDRxQz7ihurhuJsMpsan3o2+lyImfRlY74v3Ajzf912EkDG76271uVESvBsoZty4Aaw/LhGwantZQKE5sXPepxvkLzuoZsqwR9V5RAV2iFzQuU9985Jb4b8jFN3RIOAAtwqWmcxg18n954W0WFKyJ7HFnl/4HdBvk8+YFXwMYcwgfCqlaVKodNjvweNcDUvhXK1TOTi9S29aLY0awlhf3rYVbZLQFGpIJMs/etpySwC7Ex44sZTCSPUJIZuZxGXaIwmWQ=
-
+    
 before_install:
   - docker pull openjdk:8-jdk-alpine
   
@@ -27,8 +17,5 @@ script:
   - mvn clean package
 
 after_success:
-  - docker login -u $DOCKER_USER -p $DOCKER_PASS
-  - docker build
-  - docker tag $IMAGE_NAME:latest $IMAGE_NAME:$TAG
-  - docker push $IMAGE_NAME:$TAG
+  
   - bash <(curl -s https://codecov.io/bash)
