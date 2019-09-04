@@ -14,6 +14,8 @@ before_install:
 script:
   
   - mvn clean package
+  - mvn install dockerfile:build
+  - mvn install dockerfile:push
 
 after_success:
   
