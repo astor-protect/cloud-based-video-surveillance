@@ -7,18 +7,14 @@ services:
 env:
   global:
     - CODECOV_TOKEN=45174070-06b4-44b1-a855-30da3c75c37e
-  
-
-    
 before_install:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker pull openjdk:8-jdk-alpine
   
 script:
-  - mvn site
-  - mvn test
-  - mvn clean package
+  
+  - mvn install dockerfile:push
 
 after_success:
   
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - bash <(curl -s https://codecov.io/bash)
