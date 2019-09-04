@@ -16,7 +16,6 @@ script:
   - mvn clean package
   - mvn install dockerfile:build
   - mvn install dockerfile:push
-  - mvn site
 
 after_success:
   
