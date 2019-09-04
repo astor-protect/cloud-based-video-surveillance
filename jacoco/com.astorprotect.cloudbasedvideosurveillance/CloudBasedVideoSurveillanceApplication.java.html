@@ -2,13 +2,21 @@
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-<span class="fc" id="L7">public class CloudBasedVideoSurveillanceApplication {</span>
+@RestController
+<span class="fc" id="L10">public class CloudBasedVideoSurveillanceApplication {</span>
+	
+	@RequestMapping(&quot;/&quot;)
+    public String home() {
+<span class="nc" id="L14">        return &quot;Hello Docker World&quot;;</span>
+    }
 
 	public static void main(String[] args) {
-<span class="nc" id="L10">		SpringApplication.run(CloudBasedVideoSurveillanceApplication.class, args);</span>
-<span class="nc" id="L11">	}</span>
+<span class="nc" id="L18">		SpringApplication.run(CloudBasedVideoSurveillanceApplication.class, args);</span>
+<span class="nc" id="L19">	}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>
