@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
     protected void configure(HttpSecurity security) throws Exception
     {
-     security.httpBasic().disable();
+    // security.httpBasic().disable();
 
      /*  disable cross site request forgery*/
      security.csrf().disable();
@@ -34,7 +34,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         security.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
      /* access rights accorder pour tout 09-09-2019*/
-        security.authorizeRequests().antMatchers("/**").permitAll();
+        security.authorizeRequests().antMatchers("/login/**").permitAll();
+        //security.authorizeRequests().antMatchers("/").hasAnyAuthority("USER");
+
+
       security.addFilter(new JWTauthentificationFilter(authenticationManager()));
       security.addFilterBefore(new JWTauthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 

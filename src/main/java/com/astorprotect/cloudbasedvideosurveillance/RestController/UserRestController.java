@@ -32,7 +32,9 @@ public class UserRestController {
         user.setLastName(registerForm.getLastName());
 
         serviceAstorUser.saveUser(user);
-        serviceAstorUser.addRoleToUser(registerForm.getUsername(), "USER");
+        serviceAstorUser.addRoleToUser(user.getUsername(), "USER");
+
+       // serviceAstorUser.addRoleToUser(registerForm.getUsername(), "USER");
         return user;
     }
 @GetMapping("getAllUsers")

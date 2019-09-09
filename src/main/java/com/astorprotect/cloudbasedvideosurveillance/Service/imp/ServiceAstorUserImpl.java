@@ -68,7 +68,7 @@ public class ServiceAstorUserImpl implements ServiceAstorUser {
         UserRole role = roleRepository.findByAccountType(accountType);
         AstorUser user = userRepository.findByUsername(username);
         user.getRoles().add(role);
-
+        userRepository.save(user);
     }
 
     @Override
