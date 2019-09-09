@@ -35,6 +35,8 @@ public class JWTauthentificationFilter extends  UsernamePasswordAuthenticationFi
             /*stockage du json dans la classe user */
             AstorUser astorUser = new ObjectMapper().readValue(request.getInputStream(),AstorUser.class);
             //new  ObjectMapper().readValue(request.getInputStream(),AstorUser.class);
+            System.out.println("le user"+astorUser.getUsername());
+            System.out.println("le user"+astorUser.getPassword());
             return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(astorUser.getUsername(),astorUser.getPassword()));
         }catch (IOException e){
             throw new RuntimeException("Il y a un souci dans le contenu de la requete : "+e);
