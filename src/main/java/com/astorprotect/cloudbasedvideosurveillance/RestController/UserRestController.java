@@ -10,6 +10,7 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
+
 public class UserRestController {
     @Autowired
     private ServiceAstorUser serviceAstorUser;
