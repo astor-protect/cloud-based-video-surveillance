@@ -32,6 +32,7 @@ public class CloudBasedVideoSurveillanceApplication implements CommandLineRunner
 	public void run(String... args) throws Exception {
 		AstorUser user1 = serviceAstorUser.saveUser(new AstorUser("igor","igor","igor","igor","igor"));
 		AstorUser user2 = serviceAstorUser.saveUser(new AstorUser("igor2","igor","igor@gmail.com","igor","igor"));
+		AstorUser user3 = serviceAstorUser.saveUser(new AstorUser("igor3","igor3","igor@gmail.com","igor","igor"));
 
 	}
 }
