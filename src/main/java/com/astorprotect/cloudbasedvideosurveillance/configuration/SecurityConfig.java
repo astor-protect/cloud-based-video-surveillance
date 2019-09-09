@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
 /**
@@ -32,15 +33,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      /* Spring Security will never create an HttpSession and it will never use it to obtain the SecurityContext*/
         security.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-     /* access rights*/
-      //  security.authorizeRequests().antMatchers("/**").permitAll();
+     /* access rights accorder pour tout 09-09-2019*/
+        security.authorizeRequests().antMatchers("/**").permitAll();
+      security.addFilter(new JWTauthentificationFilter(authenticationManager()));
+      security.addFilterBefore(new JWTauthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
+	    /* Le systeme d'authentification base sur les services UserDetailService qui a des methodes pour l implementer ce service */
 	    auth.userDetailsService(userDetailsService)
-                .passwordEncoder(bCryptPasswordEncoder);
+                .passwordEncoder(bCryptPasswordEncoder);// Hachage de mot de passe pour harmoniser avec celui de Bd
     }
 
 }
