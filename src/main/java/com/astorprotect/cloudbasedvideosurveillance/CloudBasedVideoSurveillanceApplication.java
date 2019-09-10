@@ -1,6 +1,7 @@
 package com.astorprotect.cloudbasedvideosurveillance;
 
 import com.astorprotect.cloudbasedvideosurveillance.Model.AstorUser;
+import com.astorprotect.cloudbasedvideosurveillance.Model.UserRole;
 import com.astorprotect.cloudbasedvideosurveillance.Service.ServiceAstorUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -34,5 +35,19 @@ public class CloudBasedVideoSurveillanceApplication implements CommandLineRunner
 		AstorUser user2 = serviceAstorUser.saveUser(new AstorUser("igor2","igor","igor@gmail.com","igor","igor"));
 		AstorUser user3 = serviceAstorUser.saveUser(new AstorUser("igor3","igor3","igor@gmail.com","igor","igor"));
 
-	}
+		/* creation des roles */
+
+        serviceAstorUser.saveRole(new UserRole("USER"));
+        serviceAstorUser.saveRole(new UserRole("ADMIN"));
+        serviceAstorUser.saveRole(new UserRole("INSTALLATEUR"));
+
+System.out.println("text igor  le boss");
+        serviceAstorUser.addRoleToUser("igor","USER");
+        serviceAstorUser.addRoleToUser("igor2","USER");
+        serviceAstorUser.addRoleToUser("igor3","USER");
+
+
+
+
+    }
 }

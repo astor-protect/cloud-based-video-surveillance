@@ -10,6 +10,7 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
+
 public class UserRestController {
     @Autowired
     private ServiceAstorUser serviceAstorUser;
@@ -30,9 +31,12 @@ public class UserRestController {
         user.setEmail(registerForm.getEmail());
         user.setFirstName(registerForm.getFirstName());
         user.setLastName(registerForm.getLastName());
+        user.setPhone(registerForm.getPhone());
 
         serviceAstorUser.saveUser(user);
-        serviceAstorUser.addRoleToUser(registerForm.getUsername(), "USER");
+        serviceAstorUser.addRoleToUser(user.getUsername(), "USER");
+
+       // serviceAstorUser.addRoleToUser(registerForm.getUsername(), "USER");
         return user;
     }
 @GetMapping("getAllUsers")
