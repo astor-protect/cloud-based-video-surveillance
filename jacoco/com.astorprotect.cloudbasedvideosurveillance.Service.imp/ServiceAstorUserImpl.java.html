@@ -60,16 +60,16 @@ import java.util.List;
 
     @Override
     public UserRole saveRole(UserRole role) {
-<span class="nc" id="L63">        return roleRepository.save(role);</span>
+<span class="fc" id="L63">        return roleRepository.save(role);</span>
     }
 
     @Override
     public void addRoleToUser(String username, String accountType) {
-<span class="nc" id="L68">        UserRole role = roleRepository.findByAccountType(accountType);</span>
-<span class="nc" id="L69">        AstorUser user = userRepository.findByUsername(username);</span>
-<span class="nc" id="L70">        user.getRoles().add(role);</span>
-
-<span class="nc" id="L72">    }</span>
+<span class="fc" id="L68">        UserRole role = roleRepository.findByAccountType(accountType);</span>
+<span class="fc" id="L69">        AstorUser user = userRepository.findByUsername(username);</span>
+<span class="fc" id="L70">        user.getRoles().add(role);</span>
+<span class="fc" id="L71">        userRepository.save(user);</span>
+<span class="fc" id="L72">    }</span>
 
     @Override
     public AstorUser findUserByUsernameOrEmailOrPhone(String name) {

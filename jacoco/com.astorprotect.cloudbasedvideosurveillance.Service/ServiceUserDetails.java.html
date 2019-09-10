@@ -8,25 +8,26 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
-<span class="nc" id="L15">public class ServiceUserDetails implements UserDetailsService {</span>
+@Service(&quot;serviceuserdetails&quot;)
+<span class="fc" id="L16">public class ServiceUserDetails implements UserDetailsService {</span>
     @Autowired
     private ServiceAstorUser serviceAstorUser;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-<span class="nc" id="L22">        AstorUser user = serviceAstorUser.findByUsername(username);</span>
-<span class="nc bnc" id="L23" title="All 2 branches missed.">        if (user == null) throw new UsernameNotFoundException(username);</span>
+<span class="nc" id="L23">        AstorUser user = serviceAstorUser.findByUsername(username);</span>
+<span class="nc bnc" id="L24" title="All 2 branches missed.">        if (user == null) throw new UsernameNotFoundException(username);</span>
         /* un user a un ensemble de roles definissant ses differents niveaux d accreditation */
-<span class="nc" id="L25">        Collection&lt;GrantedAuthority&gt; authorities = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L26">        user.getRoles().forEach(r-&gt;{</span>
-<span class="nc" id="L27">            authorities.add(new SimpleGrantedAuthority(r.getAccountType()));</span>
-<span class="nc" id="L28">        });</span>
-<span class="nc" id="L29">        return new User(user.getUsername(),user.getPassword(),authorities);</span>
+<span class="nc" id="L26">        Collection&lt;GrantedAuthority&gt; authorities = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L27">        user.getRoles().forEach(r-&gt;{</span>
+<span class="nc" id="L28">            authorities.add(new SimpleGrantedAuthority(r.getAccountType()));</span>
+<span class="nc" id="L29">        });</span>
+<span class="nc" id="L30">        return new User(user.getUsername(),user.getPassword(),authorities);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

@@ -1,17 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JWTauthentificationFilter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cloud-based-video-surveillance</a> &gt; <a href="index.source.html" class="el_package">com.astorprotect.cloudbasedvideosurveillance.configuration</a> &gt; <span class="el_source">JWTauthentificationFilter.java</span></div><h1>JWTauthentificationFilter.java</h1><pre class="source lang-java linenums">package com.astorprotect.cloudbasedvideosurveillance.configuration;
 
+import com.astorprotect.cloudbasedvideosurveillance.Model.AstorUser;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-public class JWTauthentificationFilter extends UsernamePasswordAuthenticationFilter {
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+public class JWTauthentificationFilter extends  UsernamePasswordAuthenticationFilter{
     private AuthenticationManager authenticationManager;
 
     public JWTauthentificationFilter(AuthenticationManager authenticationManager){
-<span class="nc" id="L10">        super();</span>
-<span class="nc" id="L11">        this.authenticationManager = authenticationManager;</span>
-<span class="nc" id="L12">    }</span>
+<span class="fc" id="L27">        super();</span>
+<span class="fc" id="L28">        this.authenticationManager = authenticationManager;</span>
+<span class="fc" id="L29">    }</span>
 
+@Override
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException{
 
+        try {
+            /*stockage du json dans la classe user */
+<span class="nc" id="L36">            AstorUser astorUser = new ObjectMapper().readValue(request.getInputStream(),AstorUser.class);</span>
+            //new  ObjectMapper().readValue(request.getInputStream(),AstorUser.class);
+<span class="nc" id="L38">            System.out.println(&quot;le user&quot;+astorUser.getUsername());</span>
+<span class="nc" id="L39">            System.out.println(&quot;le user&quot;+astorUser.getPassword());</span>
+<span class="nc" id="L40">            return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(astorUser.getUsername(),astorUser.getPassword()));</span>
+<span class="nc" id="L41">        }catch (IOException e){</span>
+<span class="nc" id="L42">            throw new RuntimeException(&quot;Il y a un souci dans le contenu de la requete : &quot;+e);</span>
+        }
+    }
+@Override
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
+                                            FilterChain chain, Authentication authResult)throws IOException, ServletException{
+<span class="nc" id="L48">        User springUser = (User) authResult.getPrincipal();</span>
+
+<span class="nc" id="L50">        List&lt;String&gt; roles = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L51">        authResult.getAuthorities().forEach(r-&gt;{</span>
+<span class="nc" id="L52">            roles.add(r.getAuthority());</span>
+<span class="nc" id="L53">        });</span>
+
+<span class="nc" id="L55">        String jwt = Jwts.builder()</span>
+<span class="nc" id="L56">                .setSubject(springUser.getUsername())</span>
+<span class="nc" id="L57">                .setExpiration(new Date(System.currentTimeMillis()+ SecurityConstant.EXPIRATION_TIME))</span>
+<span class="nc" id="L58">                .signWith(SignatureAlgorithm.HS512,SecurityConstant.SECRET)</span>
+<span class="nc" id="L59">                .claim(&quot;roles&quot;,springUser.getAuthorities())</span>
+<span class="nc" id="L60">                .compact();</span>
+
+<span class="nc" id="L62">        System.out.println(&quot;le json webtoken : &quot; +jwt);</span>
+
+<span class="nc" id="L64">        response.addHeader(SecurityConstant.HEADER_STRING,SecurityConstant.TOKEN_PREFIX + jwt);</span>
+
+<span class="nc" id="L66">        System.out.println(&quot; reponse jsonwebtoken : &quot; + response.getHeaderNames()+ &quot; status : &quot; +response.getStatus() + &quot; le type : &quot;+response.getContentType());</span>
+<span class="nc" id="L67">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>
