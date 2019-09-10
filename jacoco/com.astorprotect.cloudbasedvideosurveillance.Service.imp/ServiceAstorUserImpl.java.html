@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ServiceAstorUserImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cloud-based-video-surveillance</a> &gt; <a href="index.source.html" class="el_package">com.astorprotect.cloudbasedvideosurveillance.Service.imp</a> &gt; <span class="el_source">ServiceAstorUserImpl.java</span></div><h1>ServiceAstorUserImpl.java</h1><pre class="source lang-java linenums">package com.astorprotect.cloudbasedvideosurveillance.Service.imp;
+
+import com.astorprotect.cloudbasedvideosurveillance.DAO.AstorUserRepository;
+import com.astorprotect.cloudbasedvideosurveillance.DAO.RoleRepository;
+import com.astorprotect.cloudbasedvideosurveillance.Model.AstorUser;
+import com.astorprotect.cloudbasedvideosurveillance.Model.UserRole;
+import com.astorprotect.cloudbasedvideosurveillance.Service.ServiceAstorUser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+<span class="fc" id="L15">public class ServiceAstorUserImpl implements ServiceAstorUser {</span>
+    @Autowired
+    AstorUserRepository userRepository;
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    RoleRepository roleRepository;
+
+    @Override
+    public AstorUser findById(Long id) {
+<span class="nc" id="L25">        return userRepository.getOne(id);</span>
+    }
+
+    @Override
+    public AstorUser findByUsername(String username) {
+<span class="nc" id="L30">        return userRepository.findByUsername(username);</span>
+    }
+
+    @Override
+    public AstorUser findByPhone(String phone) {
+<span class="nc" id="L35">        return userRepository.findByPhone(phone);</span>
+    }
+
+    @Override
+    public AstorUser findByEmail(String email) {
+<span class="nc" id="L40">        return userRepository.findByEmail(email);</span>
+    }
+
+    @Override
+    public List&lt;AstorUser&gt; getAllUsers() {
+<span class="nc" id="L45">        return userRepository.findAll();</span>
+    }
+
+    @Override
+    public AstorUser save(AstorUser user) {
+<span class="nc" id="L50">        return userRepository.save(user);</span>
+    }
+
+    @Override
+    public AstorUser saveUser(AstorUser user) {
+<span class="fc" id="L55">        String hashpwd = bCryptPasswordEncoder.encode(user.getPassword());</span>
+<span class="fc" id="L56">        user.setPassword(hashpwd);</span>
+<span class="fc" id="L57">        return userRepository.save(user);</span>
+
+    }
+
+    @Override
+    public UserRole saveRole(UserRole role) {
+<span class="nc" id="L63">        return roleRepository.save(role);</span>
+    }
+
+    @Override
+    public void addRoleToUser(String username, String accountType) {
+<span class="nc" id="L68">        UserRole role = roleRepository.findByAccountType(accountType);</span>
+<span class="nc" id="L69">        AstorUser user = userRepository.findByUsername(username);</span>
+<span class="nc" id="L70">        user.getRoles().add(role);</span>
+
+<span class="nc" id="L72">    }</span>
+
+    @Override
+    public AstorUser findUserByUsernameOrEmailOrPhone(String name) {
+<span class="nc" id="L76">        return null;</span>
+    }
+
+    @Override
+    public List&lt;AstorUser&gt; findAllUsers() {
+<span class="nc" id="L81">        return userRepository.findAll();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

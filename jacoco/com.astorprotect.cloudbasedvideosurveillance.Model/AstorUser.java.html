@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AstorUser.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cloud-based-video-surveillance</a> &gt; <a href="index.source.html" class="el_package">com.astorprotect.cloudbasedvideosurveillance.Model</a> &gt; <span class="el_source">AstorUser.java</span></div><h1>AstorUser.java</h1><pre class="source lang-java linenums">package com.astorprotect.cloudbasedvideosurveillance.Model;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+
+@Entity
+public class AstorUser implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long iduser;
+    private String username;
+    private  String email;
+    private String phone;
+    private String address;
+    private String password;
+
+    private String firstName;
+    private String lastName;
+
+<span class="fc" id="L22">    private boolean enabled = false;</span>
+
+    /* mapping orm */
+<span class="fc" id="L25">    @ManyToMany(fetch = FetchType.EAGER)</span>
+    Collection&lt;UserRole&gt; Roles = new ArrayList&lt;&gt;();
+
+    /* Constructeurs */
+
+<span class="fc" id="L30">    public AstorUser(String username,String password, String email, String phone, String address) {</span>
+<span class="fc" id="L31">        this.username = username;</span>
+<span class="fc" id="L32">        this.password = password;</span>
+<span class="fc" id="L33">        this.email = email;</span>
+<span class="fc" id="L34">        this.phone = phone;</span>
+<span class="fc" id="L35">        this.address = address;</span>
+<span class="fc" id="L36">    }</span>
+
+<span class="fc" id="L38">    public AstorUser() {</span>
+<span class="fc" id="L39">    }</span>
+
+    /* getters and setters */
+
+    public Long getIduser() {
+<span class="fc" id="L44">        return iduser;</span>
+    }
+
+    public void setIduser(Long iduser) {
+<span class="nc" id="L48">        this.iduser = iduser;</span>
+<span class="nc" id="L49">    }</span>
+
+    public String getUsername() {
+<span class="nc" id="L52">        return username;</span>
+    }
+
+    public void setUsername(String username) {
+<span class="nc" id="L56">        this.username = username;</span>
+<span class="nc" id="L57">    }</span>
+
+    public String getEmail() {
+<span class="nc" id="L60">        return email;</span>
+    }
+
+    public void setEmail(String email) {
+<span class="nc" id="L64">        this.email = email;</span>
+<span class="nc" id="L65">    }</span>
+
+    public String getPhone() {
+<span class="nc" id="L68">        return phone;</span>
+    }
+
+    public void setPhone(String phone) {
+<span class="nc" id="L72">        this.phone = phone;</span>
+<span class="nc" id="L73">    }</span>
+
+    public String getAddress() {
+<span class="nc" id="L76">        return address;</span>
+    }
+
+    public void setAddress(String address) {
+<span class="nc" id="L80">        this.address = address;</span>
+<span class="nc" id="L81">    }</span>
+
+    public String getPassword() {
+<span class="fc" id="L84">        return password;</span>
+    }
+
+    public void setPassword(String password) {
+<span class="fc" id="L88">        this.password = password;</span>
+<span class="fc" id="L89">    }</span>
+
+    public Collection&lt;UserRole&gt; getRoles() {
+<span class="nc" id="L92">        return Roles;</span>
+    }
+
+    public void setRoles(Collection&lt;UserRole&gt; roles) {
+<span class="nc" id="L96">        Roles = roles;</span>
+<span class="nc" id="L97">    }</span>
+
+    public String getFirstName() {
+<span class="nc" id="L100">        return firstName;</span>
+    }
+
+    public void setFirstName(String firstName) {
+<span class="nc" id="L104">        this.firstName = firstName;</span>
+<span class="nc" id="L105">    }</span>
+
+    public String getLastName() {
+<span class="nc" id="L108">        return lastName;</span>
+    }
+
+    public void setLastName(String lastName) {
+<span class="nc" id="L112">        this.lastName = lastName;</span>
+<span class="nc" id="L113">    }</span>
+
+    public boolean isEnabled() {
+<span class="nc" id="L116">        return enabled;</span>
+    }
+
+    public void setEnabled(boolean enabled) {
+<span class="nc" id="L120">        this.enabled = enabled;</span>
+<span class="nc" id="L121">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

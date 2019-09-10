@@ -1,3 +1,11 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.configuration,SecurityConfig,0,8,0,0,0,3,0,2,0,2
-cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance,CloudBasedVideoSurveillanceApplication,7,3,0,0,3,1,2,1,2,1
+cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.Model,UserRole,20,3,0,0,9,2,5,1,5,1
+cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.Model,AstorUser,60,47,0,0,26,15,17,5,17,5
+cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.Model,RegisterForm,52,0,0,0,22,0,15,0,15,0
+cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.RestController,UserRestController,65,3,4,0,14,1,4,1,2,1
+cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.configuration,JWTauthorizationFilter,30,0,2,0,8,0,3,0,2,0
+cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.configuration,JWTauthentificationFilter,6,0,0,0,3,0,1,0,1,0
+cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.configuration,SecurityConfig,0,26,0,0,0,8,0,3,0,3
+cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance,CloudBasedVideoSurveillanceApplication,7,44,0,0,3,6,2,3,2,3
+cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.Service.imp,ServiceAstorUserImpl,59,18,0,0,13,4,10,2,10,2
+cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.Service,ServiceUserDetails,42,0,2,0,8,0,4,0,3,0

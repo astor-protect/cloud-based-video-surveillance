@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserRestController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cloud-based-video-surveillance</a> &gt; <a href="index.source.html" class="el_package">com.astorprotect.cloudbasedvideosurveillance.RestController</a> &gt; <span class="el_source">UserRestController.java</span></div><h1>UserRestController.java</h1><pre class="source lang-java linenums">package com.astorprotect.cloudbasedvideosurveillance.RestController;
+
+import com.astorprotect.cloudbasedvideosurveillance.Model.AstorUser;
+import com.astorprotect.cloudbasedvideosurveillance.Model.RegisterForm;
+import com.astorprotect.cloudbasedvideosurveillance.Service.ServiceAstorUser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@CrossOrigin(&quot;*&quot;)
+@RestController
+<span class="fc" id="L13">public class UserRestController {</span>
+    @Autowired
+    private ServiceAstorUser serviceAstorUser;
+
+    @PostMapping(&quot;/inscription&quot;)
+    public AstorUser insciption(@RequestBody RegisterForm registerForm) {
+<span class="nc bnc" id="L19" title="All 2 branches missed.">        if (!registerForm.getPassword().equals(registerForm.getRepassword()))</span>
+<span class="nc" id="L20">            throw new RuntimeException(&quot;you must confirm your password&quot;);</span>
+
+<span class="nc" id="L22">        AstorUser astorUser = serviceAstorUser.findByUsername(registerForm.getUsername());</span>
+
+<span class="nc bnc" id="L24" title="All 2 branches missed.">        if (astorUser != null) throw new RuntimeException(&quot;This USER already exists&quot;);</span>
+
+<span class="nc" id="L26">        AstorUser user = new AstorUser();</span>
+<span class="nc" id="L27">        user.setPassword(registerForm.getPassword());</span>
+<span class="nc" id="L28">        user.setUsername(registerForm.getUsername());</span>
+
+<span class="nc" id="L30">        user.setEmail(registerForm.getEmail());</span>
+<span class="nc" id="L31">        user.setFirstName(registerForm.getFirstName());</span>
+<span class="nc" id="L32">        user.setLastName(registerForm.getLastName());</span>
+
+<span class="nc" id="L34">        serviceAstorUser.saveUser(user);</span>
+<span class="nc" id="L35">        serviceAstorUser.addRoleToUser(registerForm.getUsername(), &quot;USER&quot;);</span>
+<span class="nc" id="L36">        return user;</span>
+    }
+@GetMapping(&quot;getAllUsers&quot;)
+    public List&lt;AstorUser&gt; findAllUsers(){
+<span class="nc" id="L40">        return serviceAstorUser.getAllUsers();</span>
+}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>
