@@ -1,4 +1,4 @@
-ROM openjdk:8-jdk-alpine
+FROM openjdk:8-jdk-alpine
 MAINTAINER jupsfan@gmail.com
 ENV APP_ROOT /app
 
