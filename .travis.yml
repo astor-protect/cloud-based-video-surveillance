@@ -8,7 +8,7 @@ env:
   global:
     - CODECOV_TOKEN=45174070-06b4-44b1-a855-30da3c75c37e
 before_install:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login  -u "$DOCKER_USERNAME" --password-stdin
   - docker pull openjdk:8-jdk-alpine
   
 script:
