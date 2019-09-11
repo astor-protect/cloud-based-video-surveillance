@@ -26,6 +26,4 @@ deploy:
   api-key:
     secure: $HEROKU_API_KEY
   app: astor-protect-cloud-video
-  on:
-    tags: false
-    repo: $IMAGE_NAME
+  
