@@ -22,7 +22,7 @@ public class CloudBasedVideoSurveillanceApplication implements CommandLineRunner
 	
 	@RequestMapping("/")
     public String home() {
-        return "Hello , welcome to ASTOR PROTECT CLOUD-BASED-VIDEO-SURVEILLANCE project ! The team is working ! See you soon !";
+        return "Hello Astor Protect";
     }
 
 	public static void main(String[] args) {
