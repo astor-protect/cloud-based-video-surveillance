@@ -28,4 +28,4 @@ deploy:
   app: astor-protect-cloud-video
   on:
     tags: false
-    repo: "$IMAGE_NAME"
+    repo: $IMAGE_NAME
