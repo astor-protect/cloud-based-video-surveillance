@@ -17,14 +17,6 @@ script:
   - mvn install dockerfile:build
   - mvn install dockerfile:push
 
-
 after_success:
+  
   - bash <(curl -s https://codecov.io/bash)
-  
-# Allow Travis to help deploy the app on Heroku
-deploy:
-  provider: heroku
-  api-key:
-    secure: $HEROKU_API_KEY
-  
-  
