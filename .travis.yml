@@ -16,9 +16,6 @@ script:
   - mvn clean package
   - mvn install dockerfile:build
   - mvn install dockerfile:push
-  - docker login --username=_ --password="$HEROKU_API_KEY" registry.heroku.com
-  - docker build -t registry.heroku.com/astor-protect-cloud-video/web .
-  - docker push registry.heroku.com/astor-protect-cloud-video/web
 
 
 after_success:
