@@ -1,27 +1,23 @@
-language : java
+language: java
 jdk:
-  - openjdk8
+- openjdk8
 services:
-  - docker  
-
+- docker
 env:
   global:
-    - CODECOV_TOKEN=45174070-06b4-44b1-a855-30da3c75c37e
+  - CODECOV_TOKEN=45174070-06b4-44b1-a855-30da3c75c37e
 before_install:
-  - echo "$DOCKER_PASSWORD" | docker login  -u "$DOCKER_USERNAME" --password-stdin
-  - docker pull openjdk:8-jdk-alpine
-  
+- echo "$DOCKER_PASSWORD" | docker login  -u "$DOCKER_USERNAME" --password-stdin
+- docker pull openjdk:8-jdk-alpine
 script:
-  
-  - mvn deploy
-
+- mvn deploy
 after_success:
-  
-  - bash <(curl -s https://codecov.io/bash)
+- bash <(curl -s https://codecov.io/bash)
 deploy:
   provider: heroku
-  api-key:
-    secure: afd153c9-b084-4d40-9b2a-424214ca24ee
+  
+  api_key:
+    secure: ZVVk1r4z0k05uBqfCCwVpQ0GWg4FxEFogawqyTcCjv5PVo8TE+LTMyW5rY82AvuahsS+u2TJNevmkgQbB8qijrF7KipOun7+i1Lddgk5DAfRrVufeXQhRqKq7NUjRrVBcWDdI5BBA1K+pUwM5dsIwo8wx9USasNs1h3I9VgXEKPD4n6nJjEoI3pKYm5fP0Zj4qopljPYMMtjpARndCbKbYTnUyN3TrMuCLmEu6JIe9VQ6Dr7JtBDFmg3itj2T9V5TBHjgoRn8QlbxkC4VqO86PxKC6c08f/yFMrdBye7FK1a7kT6TLCyqEGps3f+hxxUO8nx9EuSdDrgulopUjc1bL5kx2oasZLW3AxJt1F91k+ktN7IuGJZBB97kMHRwa1oOmltS6NYcOz2ehCUurlRN0mGBXbede0cfQhMITYwiZzdL0vOD8Nw8HxOf10apBK/kgTGkNEnqM3aAI31+PgMwxDMtxYdxuQt4whmSUm8GuS5KUQPbs2vIzefmjKBz80ACIhW2OHM/iv8rIqg/jNr+NKlMhGOqekdtsFS69qrJyjs+UyO6QAYFv6JLFs96E1ZXX4nx3qnou0+k/MiyBf4Vz3dRn9I5MwZ7VNiJkXKuQdST2rNU71Xw1ACJW2cyMHl+BzvYqyLp3ifScarwj/tH8jjkPoiuXzBMNBoWt9HPIk=
   app: astor-protect-cloud-video
   on:
     repo: astor-protect/cloud-based-video-surveillance
