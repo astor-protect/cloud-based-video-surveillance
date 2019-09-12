@@ -21,7 +21,7 @@ after_success:
 deploy:
   provider: heroku
   api-key:
-    secure: $HEROKU_API_KEY
+    secure: afd153c9-b084-4d40-9b2a-424214ca24ee
   app: astor-protect-cloud-video
   on:
     repo: astor-protect/cloud-based-video-surveillance
