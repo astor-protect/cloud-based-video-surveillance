@@ -13,7 +13,9 @@ script:
 - mvn deploy
 - mvn heroku:deploy
 after_success:
+- mvn site
 - bash <(curl -s https://codecov.io/bash)
+
 #deploy:
   #provider: heroku
   #api_key:
