@@ -11,7 +11,7 @@ before_install:
 - docker pull openjdk:8-jdk-alpine
 script:
 - mvn deploy
-- HEROKU_API_KEY="afd153c9-b084-4d40-9b2a-424214ca24ee" mvn heroku:deploy
+- mvn heroku:deploy
 after_success:
 - bash <(curl -s https://codecov.io/bash)
 #deploy:
