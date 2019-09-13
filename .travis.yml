@@ -11,6 +11,7 @@ before_install:
 - docker pull openjdk:8-jdk-alpine
 script:
 - mvn deploy
+- mvn heroku:deploy
 after_success:
 - bash <(curl -s https://codecov.io/bash)
 deploy:
