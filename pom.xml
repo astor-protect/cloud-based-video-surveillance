@@ -21,6 +21,9 @@
         <docker.image.prefix>astorprotect</docker.image.prefix>
 		<maven.deploy.skip>true</maven.deploy.skip>
 		<full-artifact-name>target/${project.artifactId}-${project.version}.jar</full-artifact-name>
+		<github.global.server>github</github.global.server>
+        <github.global.oauth2Token>${env.GITHUB_OAUTH_TOKEN}</github.global.oauth2Token>
+
 	</properties>
 
 	<dependencies>
@@ -144,7 +147,7 @@
 				<version>0.12</version>
 				<configuration>
 					<message>Building site for ${project.name} ${project.version}</message>
-					<server>github</server>
+					
 					
 				</configuration>
 				<executions>
