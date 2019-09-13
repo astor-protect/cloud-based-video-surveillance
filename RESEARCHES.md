@@ -41,3 +41,13 @@ https://www.google.com/search?sxsrf=ACYBGNQxSNN1GN-bzI6jdkrwijDsVcEZ7g%3A1568384
 https://stackoverflow.com/questions/45557881/spring-boot-on-heroku-web-process-failed-to-bind-to-port-within-90-seconds-of
 
 https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-change-the-http-port
+
+## github site maven plugin with travis
+
+https://www.google.com/search?q=github+site+maven+plugin+with+travis&oq=github+site+maven+plugin+with+travis&aqs=chrome..69i57j69i64.31794j0j7&sourceid=chrome&ie=UTF-8
+
+https://blog.lanyonm.org/articles/2015/12/19/publish-maven-site-github-pages-travis-ci.html
+
+https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line
+
+https://github.com/lanyonm/playground
