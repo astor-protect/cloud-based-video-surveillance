@@ -234,10 +234,11 @@
        <plugin>
 	      <groupId>com.heroku.sdk</groupId>
 	      <artifactId>heroku-maven-plugin</artifactId>
+	      <version>2.0.11</version>
 	      <configuration>
 	        <appName>astor-protect-cloud-video</appName>
 	        <processTypes>
-	          <web>java $JAVA_OPTS -jar ${full-artifact-name}</web>
+	          <web>java $JAVA_OPTS -jar -Dserver.port=$PORT ${full-artifact-name}</web>
 	        </processTypes>
 	      </configuration>
       </plugin>
