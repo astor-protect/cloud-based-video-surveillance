@@ -19,6 +19,11 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <docker.image.prefix>astorprotect</docker.image.prefix>
+		<maven.deploy.skip>true</maven.deploy.skip>
+		<full-artifact-name>target/${project.artifactId}-${project.version}.jar</full-artifact-name>
+		<github.global.server>github</github.global.server>
+        <github.global.oauth2Token>${env.GITHUB_OAUTH_TOKEN}</github.global.oauth2Token>
+
 	</properties>
 
 	<dependencies>
@@ -153,7 +158,7 @@
 				<version>0.12</version>
 				<configuration>
 					<message>Building site for ${project.name} ${project.version}</message>
-					<server>github</server>
+					
 					
 				</configuration>
 				<executions>
@@ -209,6 +214,8 @@
 			</executions>
             <configuration>
                 <repository>${docker.image.prefix}/${project.artifactId}</repository>
+                <serverId>index.docker.io</serverId>
+      			<registryUrl>https://index.docker.io:443/v1/</registryUrl>
             </configuration>
         </plugin>
         
@@ -233,8 +240,22 @@
 		                </artifactItems>
 		            </configuration>
 		        </execution>
+			
+ 
 		    </executions>
        </plugin>
+       
+       <plugin>
+	      <groupId>com.heroku.sdk</groupId>
+	      <artifactId>heroku-maven-plugin</artifactId>
+	      <version>2.0.11</version>
+	      <configuration>
+	        <appName>astor-protect-cloud-video</appName>
+	        <processTypes>
+	          <web>java $JAVA_OPTS -jar -Dserver.port=$PORT ${full-artifact-name}</web>
+	        </processTypes>
+	      </configuration>
+      </plugin>
 			
 			
 			

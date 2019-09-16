@@ -22,7 +22,7 @@ public class CloudBasedVideoSurveillanceApplication implements CommandLineRunner
 	
 	@RequestMapping("/")
     public String home() {
-        return "Hello Docker World";
+        return "Hello Astor Protect !";
     }
 
 	public static void main(String[] args) {
