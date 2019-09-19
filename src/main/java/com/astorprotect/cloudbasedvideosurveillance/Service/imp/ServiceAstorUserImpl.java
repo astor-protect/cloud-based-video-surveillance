@@ -77,6 +77,12 @@ public class ServiceAstorUserImpl implements ServiceAstorUser {
     }
 
     @Override
+    public boolean delectAdmin(Long id_admin) {
+        userRepository.deleteById(id_admin);
+        return true;
+    }
+
+    @Override
     public List<AstorUser> findAllUsers() {
         return userRepository.findAll();
     }

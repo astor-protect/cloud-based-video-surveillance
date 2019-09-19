@@ -37,14 +37,23 @@ public class CloudBasedVideoSurveillanceApplication implements CommandLineRunner
 
 		/* creation des roles */
 
-        serviceAstorUser.saveRole(new UserRole("USER"));
+        serviceAstorUser.saveRole(new UserRole("SUPER ADMIN"));
         serviceAstorUser.saveRole(new UserRole("ADMIN"));
-        serviceAstorUser.saveRole(new UserRole("INSTALLATEUR"));
+        serviceAstorUser.saveRole(new UserRole("CLIENT BC"));
 
-System.out.println("text igor  le boss");
+		serviceAstorUser.saveRole(new UserRole("CLIENT BB"));
+		serviceAstorUser.saveRole(new UserRole("REVENDEUR"));
+		serviceAstorUser.saveRole(new UserRole("STATION DE SURVEILLANCE"));
+
+		serviceAstorUser.saveRole(new UserRole("SERVICE TECHNIQUE"));
+		serviceAstorUser.saveRole(new UserRole("INTERVENTION"));
+		serviceAstorUser.saveRole(new UserRole("INSTALLATEUR"));
+
+
+		System.out.println("text igor  le boss");
         serviceAstorUser.addRoleToUser("igor","USER");
-        serviceAstorUser.addRoleToUser("igor2","USER");
-        serviceAstorUser.addRoleToUser("igor3","USER");
+        serviceAstorUser.addRoleToUser("igor2","SUPER ADMIN");
+        serviceAstorUser.addRoleToUser("igor3","ADMIN");
 
 
 
