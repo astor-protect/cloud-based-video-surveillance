@@ -38,7 +38,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
      /* access rights accorder pour tout 09-09-2019*/
 <span class="fc" id="L40">        security.authorizeRequests().antMatchers(&quot;/login/**&quot;,&quot;/**&quot;).permitAll();</span>
-<span class="fc" id="L41">        security.authorizeRequests().antMatchers(&quot;/supadmin&quot;).hasAnyAuthority(&quot;SUPER ADMIN&quot;);</span>
+<span class="fc" id="L41">        security.authorizeRequests().antMatchers(&quot;/supadmin/**&quot;).hasAnyAuthority(&quot;SUPER ADMIN&quot;);</span>
 <span class="fc" id="L42">        security.authorizeRequests().anyRequest().authenticated();</span>
 
 <span class="fc" id="L44">      security.addFilter(new JWTauthentificationFilter(authenticationManager()));</span>
