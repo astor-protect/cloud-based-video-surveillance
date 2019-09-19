@@ -5,13 +5,26 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
+import java.util.Properties;
+
 @Configuration
-<span class="fc" id="L9">public class MailConfig {</span>
+<span class="fc" id="L11">public class MailConfig {</span>
     @Bean
     public JavaMailSender getMailSender(){
-<span class="fc" id="L12">        JavaMailSenderImpl mailSender = new  JavaMailSenderImpl();</span>
-        //TODO
-<span class="fc" id="L14">        return  mailSender;</span>
+<span class="fc" id="L14">        JavaMailSenderImpl mailSender = new  JavaMailSenderImpl();</span>
+<span class="fc" id="L15">        mailSender.setHost(&quot;smtp.gmail.com&quot;);</span>
+<span class="fc" id="L16">        mailSender.setPort(587);</span>
+
+<span class="fc" id="L18">        mailSender.setUsername(MyConstants.MY_EMAIL);</span>
+<span class="fc" id="L19">        mailSender.setPassword(MyConstants.MY_PASSWORD);</span>
+
+<span class="fc" id="L21">        Properties props = mailSender.getJavaMailProperties();</span>
+<span class="fc" id="L22">        props.put(&quot;mail.transport.protocol&quot;,&quot;smtp&quot;);</span>
+<span class="fc" id="L23">        props.put(&quot;mail.smtp.auth&quot;,&quot;true&quot;);</span>
+<span class="fc" id="L24">        props.put(&quot;mail.smtp.starttls.enable&quot;,&quot;true&quot;);</span>
+<span class="fc" id="L25">        props.put(&quot;mail.debug&quot;,&quot;true&quot;);</span>
+
+<span class="fc" id="L27">        return  mailSender;</span>
 
     }
 
