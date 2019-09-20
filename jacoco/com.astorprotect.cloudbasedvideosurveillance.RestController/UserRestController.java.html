@@ -2,62 +2,46 @@
 
 import com.astorprotect.cloudbasedvideosurveillance.Model.AstorUser;
 import com.astorprotect.cloudbasedvideosurveillance.Model.RegisterForm;
-import com.astorprotect.cloudbasedvideosurveillance.Service.EmailService;
 import com.astorprotect.cloudbasedvideosurveillance.Service.ServiceAstorUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static java.lang.Boolean.TRUE;
-
 @CrossOrigin(&quot;*&quot;)
 @RestController
 
-<span class="fc" id="L17">public class UserRestController {</span>
+<span class="fc" id="L14">public class UserRestController {</span>
     @Autowired
     private ServiceAstorUser serviceAstorUser;
-    @Autowired
-    private EmailService emailService;
-    public static final String REGISTRATION_SUBJECT =  &quot;ASTOR : REGISTRATION SUCCESSFULLLY&quot;;
 
     @PostMapping(&quot;/inscription&quot;)
     public AstorUser insciption(@RequestBody RegisterForm registerForm) {
-<span class="nc bnc" id="L26" title="All 2 branches missed.">        if (!registerForm.getPassword().equals(registerForm.getRepassword()))</span>
-<span class="nc" id="L27">            throw new RuntimeException(&quot;you must confirm your password&quot;);</span>
+<span class="nc bnc" id="L20" title="All 2 branches missed.">        if (!registerForm.getPassword().equals(registerForm.getRepassword()))</span>
+<span class="nc" id="L21">            throw new RuntimeException(&quot;you must confirm your password&quot;);</span>
 
-<span class="nc" id="L29">        AstorUser astorUser = serviceAstorUser.findByUsername(registerForm.getUsername());</span>
+<span class="nc" id="L23">        AstorUser astorUser = serviceAstorUser.findByUsername(registerForm.getUsername());</span>
 
-<span class="nc bnc" id="L31" title="All 2 branches missed.">        if (astorUser != null) throw new RuntimeException(&quot;This USER already exists&quot;);</span>
-       // if (registerForm.getRole()==null) throw new RuntimeException(&quot;This USER Not have Role&quot;);
+<span class="nc bnc" id="L25" title="All 2 branches missed.">        if (astorUser != null) throw new RuntimeException(&quot;This USER already exists&quot;);</span>
 
-<span class="nc" id="L34">        AstorUser user = new AstorUser();</span>
-<span class="nc" id="L35">        user.setPassword(registerForm.getPassword());</span>
-<span class="nc" id="L36">        user.setUsername(registerForm.getUsername());</span>
+<span class="nc" id="L27">        AstorUser user = new AstorUser();</span>
+<span class="nc" id="L28">        user.setPassword(registerForm.getPassword());</span>
+<span class="nc" id="L29">        user.setUsername(registerForm.getUsername());</span>
 
-<span class="nc" id="L38">        user.setEmail(registerForm.getEmail());</span>
-<span class="nc" id="L39">        user.setFirstName(registerForm.getFirstName());</span>
-<span class="nc" id="L40">        user.setLastName(registerForm.getLastName());</span>
-<span class="nc" id="L41">        user.setPhone(registerForm.getPhone());</span>
-<span class="nc" id="L42">        user.setAddress(registerForm.getAddress());</span>
+<span class="nc" id="L31">        user.setEmail(registerForm.getEmail());</span>
+<span class="nc" id="L32">        user.setFirstName(registerForm.getFirstName());</span>
+<span class="nc" id="L33">        user.setLastName(registerForm.getLastName());</span>
+<span class="nc" id="L34">        user.setPhone(registerForm.getPhone());</span>
 
-<span class="nc" id="L44">        serviceAstorUser.saveUser(user);</span>
-<span class="nc" id="L45">        serviceAstorUser.addRoleToUser(registerForm.getUsername(), registerForm.getRole());</span>
-<span class="nc" id="L46">        emailService.sendSimpleMessage(user.getEmail(), REGISTRATION_SUBJECT,&quot;Thank for coming in&quot;);</span>
-<span class="nc" id="L47">        return user;</span>
+<span class="nc" id="L36">        serviceAstorUser.saveUser(user);</span>
+<span class="nc" id="L37">        serviceAstorUser.addRoleToUser(user.getUsername(), &quot;USER&quot;);</span>
+
+       // serviceAstorUser.addRoleToUser(registerForm.getUsername(), &quot;USER&quot;);
+<span class="nc" id="L40">        return user;</span>
     }
 @GetMapping(&quot;getAllUsers&quot;)
     public List&lt;AstorUser&gt; findAllUsers(){
-<span class="nc" id="L51">        return serviceAstorUser.getAllUsers();</span>
+<span class="nc" id="L44">        return serviceAstorUser.getAllUsers();</span>
 }
-
-/* Test envoi  simple d'email */
-    @RequestMapping(value = &quot;envoi&quot;,method = RequestMethod.GET)
-    public Boolean createMail(){
-<span class="nc" id="L57">        emailService.sendSimpleMessage(&quot;jokayam95@gmail.com&quot;,&quot;TEST EMAIL ASTOR&quot;, &quot;Ceci  est un exercice.&quot;);</span>
-<span class="nc" id="L58">        return TRUE;</span>
-    }
-
-
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>
