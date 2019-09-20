@@ -39,22 +39,23 @@ import static java.lang.Boolean.TRUE;
 <span class="nc" id="L39">        user.setFirstName(registerForm.getFirstName());</span>
 <span class="nc" id="L40">        user.setLastName(registerForm.getLastName());</span>
 <span class="nc" id="L41">        user.setPhone(registerForm.getPhone());</span>
+<span class="nc" id="L42">        user.setAddress(registerForm.getAddress());</span>
 
-<span class="nc" id="L43">        serviceAstorUser.saveUser(user);</span>
-<span class="nc" id="L44">        serviceAstorUser.addRoleToUser(registerForm.getUsername(), &quot;USER&quot;);</span>
-<span class="nc" id="L45">        emailService.sendSimpleMessage(user.getEmail(), REGISTRATION_SUBJECT,&quot;Thank for coming in&quot;);</span>
-<span class="nc" id="L46">        return user;</span>
+<span class="nc" id="L44">        serviceAstorUser.saveUser(user);</span>
+<span class="nc" id="L45">        serviceAstorUser.addRoleToUser(registerForm.getUsername(), registerForm.getRole());</span>
+<span class="nc" id="L46">        emailService.sendSimpleMessage(user.getEmail(), REGISTRATION_SUBJECT,&quot;Thank for coming in&quot;);</span>
+<span class="nc" id="L47">        return user;</span>
     }
 @GetMapping(&quot;getAllUsers&quot;)
     public List&lt;AstorUser&gt; findAllUsers(){
-<span class="nc" id="L50">        return serviceAstorUser.getAllUsers();</span>
+<span class="nc" id="L51">        return serviceAstorUser.getAllUsers();</span>
 }
 
 /* Test envoi  simple d'email */
     @RequestMapping(value = &quot;envoi&quot;,method = RequestMethod.GET)
     public Boolean createMail(){
-<span class="nc" id="L56">        emailService.sendSimpleMessage(&quot;jokayam95@gmail.com&quot;,&quot;TEST EMAIL ASTOR&quot;, &quot;Ceci  est un exercice.&quot;);</span>
-<span class="nc" id="L57">        return TRUE;</span>
+<span class="nc" id="L57">        emailService.sendSimpleMessage(&quot;jokayam95@gmail.com&quot;,&quot;TEST EMAIL ASTOR&quot;, &quot;Ceci  est un exercice.&quot;);</span>
+<span class="nc" id="L58">        return TRUE;</span>
     }
 
 

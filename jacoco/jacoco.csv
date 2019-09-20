@@ -1,5 +1,5 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.Model,RegisterForm,59,0,0,0,25,0,17,0,17,0
+cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.Model,RegisterForm,66,0,0,0,28,0,19,0,19,0
 cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.Model,UserRole,11,12,0,0,5,6,3,3,3,3
 cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.Model,AstorUser,57,50,0,0,25,16,16,6,16,6
 cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.EmailConfig,MyConstants,3,0,0,0,1,0,1,0,1,0
@@ -9,9 +9,9 @@ cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.conf
 cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.configuration,JWTauthorizationFilter,89,3,6,0,22,1,5,1,2,1
 cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.configuration,SecurityConfig,0,85,0,0,0,14,0,3,0,3
 cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.configuration,JWTauthentificationFilter,137,6,0,0,21,3,3,1,3,1
-cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.RestController,UserRestController,84,3,4,0,18,1,5,1,3,1
-cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.RestController,SupAdminRestControler,98,3,6,0,20,1,7,1,4,1
+cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.RestController,UserRestController,89,3,4,0,19,1,5,1,3,1
+cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.RestController,SupAdminRestControler,102,3,6,0,21,1,7,1,4,1
 cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance,CloudBasedVideoSurveillanceApplication,7,134,0,0,3,19,2,3,2,3
 cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.Service.imp,EmailServiceImpl,73,3,0,0,24,1,3,1,3,1
 cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.Service.imp,ServiceAstorUserImpl,43,45,0,0,10,10,9,4,9,4
-cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.Service,ServiceUserDetails,39,3,2,0,7,1,3,1,2,1
+cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.Service,ServiceUserDetails,46,3,2,0,7,1,3,1,2,1

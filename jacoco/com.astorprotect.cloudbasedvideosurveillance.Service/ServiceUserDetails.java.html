@@ -21,7 +21,7 @@ import java.util.Collection;
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
 <span class="nc" id="L23">        AstorUser user = serviceAstorUser.findByUsername(username);</span>
-<span class="nc bnc" id="L24" title="All 2 branches missed.">        if (user == null) throw new UsernameNotFoundException(username);</span>
+<span class="nc bnc" id="L24" title="All 2 branches missed.">        if (user == null) throw new UsernameNotFoundException(username+ &quot; inexistant!&quot;);</span>
         /* un user a un ensemble de roles definissant ses differents niveaux d accreditation */
 <span class="nc" id="L26">        Collection&lt;GrantedAuthority&gt; authorities = new ArrayList&lt;&gt;();</span>
 <span class="nc" id="L27">        user.getRoles().forEach(r-&gt;{</span>
