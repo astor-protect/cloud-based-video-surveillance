@@ -6,12 +6,18 @@ services:
 env:
   global:
   - CODECOV_TOKEN=45174070-06b4-44b1-a855-30da3c75c37e
+addons:
+  sonarcloud:
+    organization: "astor-protect-cloud-based-video-surveillance"
+    token:
+      secure: $SONAR_TOKEN
 before_install:
 - echo "$DOCKER_PASSWORD" | docker login  -u "$DOCKER_USERNAME" --password-stdin
 - docker pull openjdk:8-jdk-alpine
 script:
 - mvn deploy
 - mvn heroku:deploy
+- sonar-scanner
 after_success:
 - mvn site
 - bash <(curl -s https://codecov.io/bash)
