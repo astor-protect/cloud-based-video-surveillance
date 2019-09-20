@@ -17,10 +17,11 @@ before_install:
 script:
 - mvn deploy
 - mvn heroku:deploy
-- sonar-scanner
 after_success:
 - mvn site
 - bash <(curl -s https://codecov.io/bash)
+# the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
 
 #deploy:
   #provider: heroku
