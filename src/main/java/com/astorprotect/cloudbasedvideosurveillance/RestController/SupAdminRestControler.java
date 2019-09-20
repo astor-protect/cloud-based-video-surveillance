@@ -39,6 +39,7 @@ public class SupAdminRestControler {
         user.setFirstName(registerForm.getFirstName());
         user.setLastName(registerForm.getLastName());
         user.setPhone(registerForm.getPhone());
+        user.setAddress(registerForm.getAddress());
 
         serviceAstorUser.saveUser(user);
         serviceAstorUser.addRoleToUser(registerForm.getUsername(), registerForm.getRole());

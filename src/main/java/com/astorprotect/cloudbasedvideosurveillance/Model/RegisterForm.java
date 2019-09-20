@@ -9,6 +9,7 @@ public class RegisterForm {
     private String email;
     private String phone;
     private String role;
+    private String address;
 
     public String getUsername() {
         return username;
@@ -72,5 +73,13 @@ public class RegisterForm {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

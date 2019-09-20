@@ -21,7 +21,7 @@ public class ServiceUserDetails implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         AstorUser user = serviceAstorUser.findByUsername(username);
-        if (user == null) throw new UsernameNotFoundException(username);
+        if (user == null) throw new UsernameNotFoundException(username+ " inexistant!");
         /* un user a un ensemble de roles definissant ses differents niveaux d accreditation */
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         user.getRoles().forEach(r->{
