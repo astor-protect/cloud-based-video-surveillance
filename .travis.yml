@@ -3,9 +3,7 @@ jdk:
 - openjdk8
 services:
 - docker
-env:
-  global:
-  - CODECOV_TOKEN=45174070-06b4-44b1-a855-30da3c75c37e
+
 addons:
   sonarcloud:
     organization: "astor-protect-cloud-based-video-surveillance"
