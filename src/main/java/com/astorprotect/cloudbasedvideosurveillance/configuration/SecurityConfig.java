@@ -1,6 +1,7 @@
 package com.astorprotect.cloudbasedvideosurveillance.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,23 +20,25 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	@Autowired
+    @Qualifier("serviceuserdetails")
+    @Autowired
     private UserDetailsService userDetailsService;
 	@Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 	@Override
     protected void configure(HttpSecurity security) throws Exception
     {
-    // security.httpBasic().disable();
+    security.httpBasic().disable();
 
      /*  disable cross site request forgery*/
      security.csrf().disable();
+     security.cors().disable();
      /* Spring Security will never create an HttpSession and it will never use it to obtain the SecurityContext*/
         security.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
      /* access rights accorder pour tout 09-09-2019*/
         security.authorizeRequests().antMatchers("/login/**","/**").permitAll();
-        security.authorizeRequests().antMatchers("/").hasAnyAuthority("USER");
+        security.authorizeRequests().antMatchers("/supadmin/**").hasAnyAuthority("SUPER ADMIN");
         security.authorizeRequests().anyRequest().authenticated();
 
       security.addFilter(new JWTauthentificationFilter(authenticationManager()));

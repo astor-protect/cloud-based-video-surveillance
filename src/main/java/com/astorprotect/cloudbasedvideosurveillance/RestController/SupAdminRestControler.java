@@ -11,10 +11,10 @@ import java.util.List;
 
 import static java.lang.Boolean.TRUE;
 
-@CrossOrigin("*")
+@RequestMapping("/supadmin")
 @RestController
-
-public class UserRestController {
+@CrossOrigin("*")
+public class SupAdminRestControler {
     @Autowired
     private ServiceAstorUser serviceAstorUser;
     @Autowired
@@ -29,7 +29,7 @@ public class UserRestController {
         AstorUser astorUser = serviceAstorUser.findByUsername(registerForm.getUsername());
 
         if (astorUser != null) throw new RuntimeException("This USER already exists");
-       // if (registerForm.getRole()==null) throw new RuntimeException("This USER Not have Role");
+        if (registerForm.getRole()==null) throw new RuntimeException("This USER Not have Role");
 
         AstorUser user = new AstorUser();
         user.setPassword(registerForm.getPassword());
@@ -46,17 +46,20 @@ public class UserRestController {
         emailService.sendSimpleMessage(user.getEmail(), REGISTRATION_SUBJECT,"Thank for coming in");
         return user;
     }
-@GetMapping("getAllUsers")
+    @GetMapping("getAllUsers")
     public List<AstorUser> findAllUsers(){
         return serviceAstorUser.getAllUsers();
-}
+    }
 
-/* Test envoi  simple d'email */
+    /* Test envoi  simple d'email */
     @RequestMapping(value = "envoi",method = RequestMethod.GET)
     public Boolean createMail(){
         emailService.sendSimpleMessage("jokayam95@gmail.com","TEST EMAIL ASTOR", "Ceci  est un exercice.");
         return TRUE;
     }
 
-
+    @DeleteMapping("/delect_user/{id_user}")
+    boolean delectUser(@PathVariable Long id_user){
+        return serviceAstorUser.delectAdmin(id_user);
+    }
 }

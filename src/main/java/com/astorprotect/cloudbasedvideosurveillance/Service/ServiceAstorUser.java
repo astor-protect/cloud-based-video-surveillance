@@ -20,4 +20,5 @@ public interface ServiceAstorUser {
     UserRole saveRole(UserRole role);
     void addRoleToUser(String username, String accountType);
     AstorUser findUserByUsernameOrEmailOrPhone(String name);
+    boolean delectAdmin(Long id_admin);
 }

@@ -8,6 +8,8 @@ public class RegisterForm {
     private String lastName;
     private String email;
     private String phone;
+    private String role;
+    private String address;
 
     public String getUsername() {
         return username;
@@ -63,5 +65,21 @@ public class RegisterForm {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
