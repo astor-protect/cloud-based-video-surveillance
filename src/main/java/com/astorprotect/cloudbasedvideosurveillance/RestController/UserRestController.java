@@ -41,8 +41,9 @@ public class UserRestController {
         user.setPhone(registerForm.getPhone());
         user.setAddress(registerForm.getAddress());
 
+
         serviceAstorUser.saveUser(user);
-        serviceAstorUser.addRoleToUser(registerForm.getUsername(), registerForm.getRole());
+        serviceAstorUser.addRoleToUser(user.getUsername(), registerForm.getRole());
         emailService.sendSimpleMessage(user.getEmail(), REGISTRATION_SUBJECT,"Thank for coming in");
         return user;
     }
