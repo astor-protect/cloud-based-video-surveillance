@@ -1,6 +1,12 @@
 language: java
 jdk:
 - openjdk8
+
+# avoiding this error : "the job exceeded the maximum log length and has been terminated "
+cache: 
+  directories:
+  - .autoconf
+  - $HOME/.m2
 services:
 - docker
 
@@ -21,10 +27,3 @@ after_success:
 # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
 - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
 
-#deploy:
-  #provider: heroku
-  #api_key:
-    #secure: d/U/9MfCNyj51eC8EjIuqSXReRaoZdT67JfV915kaIYkYA9V4tOGTKB3qfvt5QZkwVymmDPd3ENeDrWnvdRk2D0SMWuq6oa4ThuvoJuDkdt0GoG9VzaQMf2m55rzezP491gZOpmETFPbGtqcz47hrLUwrQC4+Abo3fv+JkUNzDNEafYiRK3EZIgxptmDJAtI4/ZVYgioG5CBi+hZA4oueLvcKA+3Cci6ZsjHk7bHi8NyYnSQLilj/SHiEVNVcmnx2tOFQWAyqL5l42jSTWIIo+96NfTkvXmH6jYosAWaNn5FzCE77t1MQTfx4qa0sUKajCp1aDdGJZyxfaBlT1rmWJ5yNY78d+cH+KgwslqomgBe1h6GR4fH7MQRstNjnvc4MzxZBHal/iTM12hCFlbHj2Ipzqj2ZBlcp6AyWLaOuTRwa5H0fCUGS2Q24VpsBIjoSbhvJ0LOlOv6O3fgN4DkkudwsG39KIDe9r5uO3ensVp4xaUWtEPK7aHiRzBf0z1lX+x/a2+qRecUfNllnrvPEOgi1orhNdwfDqeYiCmdvB+L37XbRKoGZg3qUIDDZ5N4et/66baEhzrC8/t/RS5fdtJyViKXtkkD/jcATkbXKkZ6sDCMuZvY0AAfxodqH7YCnFW+/b3YnxDbsnFCv3wW9LBcV8k7hNo2/R9yLf9L4nU=
-  #app: astor-protect-cloud-video
-  #on:
-    #repo: astor-protect/cloud-based-video-surveillance
