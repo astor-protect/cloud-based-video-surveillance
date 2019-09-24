@@ -3,6 +3,7 @@ package com.astorprotect.cloudbasedvideosurveillance.Service;
 import com.astorprotect.cloudbasedvideosurveillance.Model.AstorUser;
 import com.astorprotect.cloudbasedvideosurveillance.Model.UserRole;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface ServiceAstorUser {
@@ -21,4 +22,18 @@ public interface ServiceAstorUser {
     void addRoleToUser(String username, String accountType);
     AstorUser findUserByUsernameOrEmailOrPhone(String name);
     boolean delectAdmin(Long id_admin);
+
+    List<AstorUser> findAllByAccountType(String role);
+    List<AstorUser> findAllByRole(String role);
+
+    /*retirer un role a un user*/
+    void deleteRoleToUser(String username,String accountType);
+
+    /* retirer tous les roles à un user */
+    void deleteAllRolesToUser(AstorUser user);
+
+    boolean activateUser(AstorUser user);
+
+    List<UserRole> findallRoles();
 }
+

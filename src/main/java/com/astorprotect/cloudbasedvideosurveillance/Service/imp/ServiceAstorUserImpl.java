@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -19,6 +21,7 @@ public class ServiceAstorUserImpl implements ServiceAstorUser {
     BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     RoleRepository roleRepository;
+
 
     @Override
     public AstorUser findById(Long id) {
@@ -72,6 +75,21 @@ public class ServiceAstorUserImpl implements ServiceAstorUser {
     }
 
     @Override
+    public void deleteRoleToUser(String username, String accountType) {
+        UserRole role = roleRepository.findByAccountType(accountType);
+        AstorUser user  = userRepository.findByUsername(username);
+        user.getRoles().remove(role);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void deleteAllRolesToUser(AstorUser user) {
+       // AstorUser  user = userRepository.findByUsername(username);
+        user.getRoles().clear();
+        userRepository.save(user);
+    }
+
+    @Override
     public AstorUser findUserByUsernameOrEmailOrPhone(String name) {
         return null;
     }
@@ -86,4 +104,41 @@ public class ServiceAstorUserImpl implements ServiceAstorUser {
     public List<AstorUser> findAllUsers() {
         return userRepository.findAll();
     }
+
+    @Override
+    public List<AstorUser> findAllByAccountType(String role) {
+        return roleRepository.findAllByAccountType(role);
+    }
+
+    @Override
+   public List<AstorUser> findAllByRole(String role) {
+        List<AstorUser> userList = userRepository.findAll();
+        List<AstorUser> usersByRole = new ArrayList<>();
+        for (AstorUser user : userList){
+            if (user.getRoles().contains(roleRepository.findByAccountType(role))){
+                usersByRole.add(user);
+            }
+        }
+     return usersByRole;
+ }
+
+
+    @Override
+    public boolean activateUser(AstorUser user) {
+        if (user.isActive() == true){
+            user.setActive(false);
+            userRepository.save(user);
+            return user.isActive();
+        }else {
+            user.setActive(true);
+            userRepository.save(user);
+            return user.isActive();
+        }
+    }
+
+    @Override
+    public List<UserRole> findallRoles() {
+        return roleRepository.findAll();
+    }
+
 }

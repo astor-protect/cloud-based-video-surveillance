@@ -59,5 +59,10 @@ public class UserRestController {
         return TRUE;
     }
 
+    /* recuperer une liste d users */
+    @GetMapping("getByRole/{role}")
+    public List<AstorUser> findUsersByRole(@PathVariable String role){
+       return serviceAstorUser.findAllByAccountType(role);
+    }
 
 }
