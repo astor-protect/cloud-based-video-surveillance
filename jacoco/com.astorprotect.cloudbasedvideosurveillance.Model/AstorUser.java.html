@@ -20,104 +20,113 @@ public class AstorUser implements Serializable {
     private String lastName;
 
 <span class="fc" id="L22">    private boolean enabled = false;</span>
+<span class="fc" id="L23">    private boolean active= true;</span>
 
     /* mapping orm */
-<span class="fc" id="L25">    @ManyToMany(fetch = FetchType.EAGER)</span>
-    Collection&lt;UserRole&gt; Roles = new ArrayList&lt;&gt;();
+<span class="fc" id="L26">    @ManyToMany(fetch = FetchType.EAGER)</span>
+    private Collection&lt;UserRole&gt; Roles = new ArrayList&lt;&gt;();
 
     /* Constructeurs */
 
-<span class="fc" id="L30">    public AstorUser(String username,String password, String email, String phone, String address) {</span>
-<span class="fc" id="L31">        this.username = username;</span>
-<span class="fc" id="L32">        this.password = password;</span>
-<span class="fc" id="L33">        this.email = email;</span>
-<span class="fc" id="L34">        this.phone = phone;</span>
-<span class="fc" id="L35">        this.address = address;</span>
-<span class="fc" id="L36">    }</span>
+<span class="fc" id="L31">    public AstorUser(String username,String password, String email, String phone, String address) {</span>
+<span class="fc" id="L32">        this.username = username;</span>
+<span class="fc" id="L33">        this.password = password;</span>
+<span class="fc" id="L34">        this.email = email;</span>
+<span class="fc" id="L35">        this.phone = phone;</span>
+<span class="fc" id="L36">        this.address = address;</span>
+<span class="fc" id="L37">    }</span>
 
-<span class="fc" id="L38">    public AstorUser() {</span>
-<span class="fc" id="L39">    }</span>
+<span class="fc" id="L39">    public AstorUser() {</span>
+<span class="fc" id="L40">    }</span>
 
     /* getters and setters */
 
     public Long getIduser() {
-<span class="fc" id="L44">        return iduser;</span>
+<span class="fc" id="L45">        return iduser;</span>
     }
 
     public void setIduser(Long iduser) {
-<span class="nc" id="L48">        this.iduser = iduser;</span>
-<span class="nc" id="L49">    }</span>
+<span class="nc" id="L49">        this.iduser = iduser;</span>
+<span class="nc" id="L50">    }</span>
 
     public String getUsername() {
-<span class="nc" id="L52">        return username;</span>
+<span class="nc" id="L53">        return username;</span>
     }
 
     public void setUsername(String username) {
-<span class="nc" id="L56">        this.username = username;</span>
-<span class="nc" id="L57">    }</span>
+<span class="nc" id="L57">        this.username = username;</span>
+<span class="nc" id="L58">    }</span>
 
     public String getEmail() {
-<span class="nc" id="L60">        return email;</span>
+<span class="nc" id="L61">        return email;</span>
     }
 
     public void setEmail(String email) {
-<span class="nc" id="L64">        this.email = email;</span>
-<span class="nc" id="L65">    }</span>
+<span class="nc" id="L65">        this.email = email;</span>
+<span class="nc" id="L66">    }</span>
 
     public String getPhone() {
-<span class="nc" id="L68">        return phone;</span>
+<span class="nc" id="L69">        return phone;</span>
     }
 
     public void setPhone(String phone) {
-<span class="nc" id="L72">        this.phone = phone;</span>
-<span class="nc" id="L73">    }</span>
+<span class="nc" id="L73">        this.phone = phone;</span>
+<span class="nc" id="L74">    }</span>
 
     public String getAddress() {
-<span class="nc" id="L76">        return address;</span>
+<span class="nc" id="L77">        return address;</span>
     }
 
     public void setAddress(String address) {
-<span class="nc" id="L80">        this.address = address;</span>
-<span class="nc" id="L81">    }</span>
+<span class="nc" id="L81">        this.address = address;</span>
+<span class="nc" id="L82">    }</span>
 
     public String getPassword() {
-<span class="fc" id="L84">        return password;</span>
+<span class="fc" id="L85">        return password;</span>
     }
 
     public void setPassword(String password) {
-<span class="fc" id="L88">        this.password = password;</span>
-<span class="fc" id="L89">    }</span>
+<span class="fc" id="L89">        this.password = password;</span>
+<span class="fc" id="L90">    }</span>
 
     public Collection&lt;UserRole&gt; getRoles() {
-<span class="fc" id="L92">        return Roles;</span>
+<span class="fc" id="L93">        return Roles;</span>
     }
 
     public void setRoles(Collection&lt;UserRole&gt; roles) {
-<span class="nc" id="L96">        Roles = roles;</span>
-<span class="nc" id="L97">    }</span>
+<span class="nc" id="L97">        Roles = roles;</span>
+<span class="nc" id="L98">    }</span>
 
     public String getFirstName() {
-<span class="nc" id="L100">        return firstName;</span>
+<span class="nc" id="L101">        return firstName;</span>
     }
 
     public void setFirstName(String firstName) {
-<span class="nc" id="L104">        this.firstName = firstName;</span>
-<span class="nc" id="L105">    }</span>
+<span class="nc" id="L105">        this.firstName = firstName;</span>
+<span class="nc" id="L106">    }</span>
 
     public String getLastName() {
-<span class="nc" id="L108">        return lastName;</span>
+<span class="nc" id="L109">        return lastName;</span>
     }
 
     public void setLastName(String lastName) {
-<span class="nc" id="L112">        this.lastName = lastName;</span>
-<span class="nc" id="L113">    }</span>
+<span class="nc" id="L113">        this.lastName = lastName;</span>
+<span class="nc" id="L114">    }</span>
 
     public boolean isEnabled() {
-<span class="nc" id="L116">        return enabled;</span>
+<span class="nc" id="L117">        return enabled;</span>
     }
 
     public void setEnabled(boolean enabled) {
-<span class="nc" id="L120">        this.enabled = enabled;</span>
-<span class="nc" id="L121">    }</span>
+<span class="nc" id="L121">        this.enabled = enabled;</span>
+<span class="nc" id="L122">    }</span>
+
+    public boolean isActive() {
+<span class="nc" id="L125">        return active;</span>
+    }
+
+    public void setActive(boolean active) {
+<span class="nc" id="L129">        this.active = active;</span>
+<span class="nc" id="L130">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

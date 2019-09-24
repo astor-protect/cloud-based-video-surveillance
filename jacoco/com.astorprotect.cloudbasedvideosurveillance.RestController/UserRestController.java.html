@@ -41,23 +41,29 @@ import static java.lang.Boolean.TRUE;
 <span class="nc" id="L41">        user.setPhone(registerForm.getPhone());</span>
 <span class="nc" id="L42">        user.setAddress(registerForm.getAddress());</span>
 
-<span class="nc" id="L44">        serviceAstorUser.saveUser(user);</span>
-<span class="nc" id="L45">        serviceAstorUser.addRoleToUser(registerForm.getUsername(), registerForm.getRole());</span>
-<span class="nc" id="L46">        emailService.sendSimpleMessage(user.getEmail(), REGISTRATION_SUBJECT,&quot;Thank for coming in&quot;);</span>
-<span class="nc" id="L47">        return user;</span>
+
+<span class="nc" id="L45">        serviceAstorUser.saveUser(user);</span>
+<span class="nc" id="L46">        serviceAstorUser.addRoleToUser(user.getUsername(), registerForm.getRole());</span>
+<span class="nc" id="L47">        emailService.sendSimpleMessage(user.getEmail(), REGISTRATION_SUBJECT,&quot;Thank for coming in&quot;);</span>
+<span class="nc" id="L48">        return user;</span>
     }
 @GetMapping(&quot;getAllUsers&quot;)
     public List&lt;AstorUser&gt; findAllUsers(){
-<span class="nc" id="L51">        return serviceAstorUser.getAllUsers();</span>
+<span class="nc" id="L52">        return serviceAstorUser.getAllUsers();</span>
 }
 
 /* Test envoi  simple d'email */
     @RequestMapping(value = &quot;envoi&quot;,method = RequestMethod.GET)
     public Boolean createMail(){
-<span class="nc" id="L57">        emailService.sendSimpleMessage(&quot;jokayam95@gmail.com&quot;,&quot;TEST EMAIL ASTOR&quot;, &quot;Ceci  est un exercice.&quot;);</span>
-<span class="nc" id="L58">        return TRUE;</span>
+<span class="nc" id="L58">        emailService.sendSimpleMessage(&quot;jokayam95@gmail.com&quot;,&quot;TEST EMAIL ASTOR&quot;, &quot;Ceci  est un exercice.&quot;);</span>
+<span class="nc" id="L59">        return TRUE;</span>
     }
 
+    /* recuperer une liste d users */
+    @GetMapping(&quot;getByRole/{role}&quot;)
+    public List&lt;AstorUser&gt; findUsersByRole(@PathVariable String role){
+<span class="nc" id="L65">       return serviceAstorUser.findAllByAccountType(role);</span>
+    }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

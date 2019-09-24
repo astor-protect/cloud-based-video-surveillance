@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
-<span class="fc" id="L15">public class ServiceAstorUserImpl implements ServiceAstorUser {</span>
+<span class="fc" id="L17">public class ServiceAstorUserImpl implements ServiceAstorUser {</span>
     @Autowired
     AstorUserRepository userRepository;
     @Autowired
@@ -20,71 +22,124 @@ import java.util.List;
     @Autowired
     RoleRepository roleRepository;
 
+
     @Override
     public AstorUser findById(Long id) {
-<span class="nc" id="L25">        return userRepository.getOne(id);</span>
+<span class="nc" id="L28">        return userRepository.getOne(id);</span>
     }
 
     @Override
     public AstorUser findByUsername(String username) {
-<span class="nc" id="L30">        return userRepository.findByUsername(username);</span>
+<span class="nc" id="L33">        return userRepository.findByUsername(username);</span>
     }
 
     @Override
     public AstorUser findByPhone(String phone) {
-<span class="nc" id="L35">        return userRepository.findByPhone(phone);</span>
+<span class="nc" id="L38">        return userRepository.findByPhone(phone);</span>
     }
 
     @Override
     public AstorUser findByEmail(String email) {
-<span class="nc" id="L40">        return userRepository.findByEmail(email);</span>
+<span class="nc" id="L43">        return userRepository.findByEmail(email);</span>
     }
 
     @Override
     public List&lt;AstorUser&gt; getAllUsers() {
-<span class="nc" id="L45">        return userRepository.findAll();</span>
+<span class="nc" id="L48">        return userRepository.findAll();</span>
     }
 
     @Override
     public AstorUser save(AstorUser user) {
-<span class="nc" id="L50">        return userRepository.save(user);</span>
+<span class="nc" id="L53">        return userRepository.save(user);</span>
     }
 
     @Override
     public AstorUser saveUser(AstorUser user) {
-<span class="fc" id="L55">        String hashpwd = bCryptPasswordEncoder.encode(user.getPassword());</span>
-<span class="fc" id="L56">        user.setPassword(hashpwd);</span>
-<span class="fc" id="L57">        return userRepository.save(user);</span>
+<span class="fc" id="L58">        String hashpwd = bCryptPasswordEncoder.encode(user.getPassword());</span>
+<span class="fc" id="L59">        user.setPassword(hashpwd);</span>
+<span class="fc" id="L60">        return userRepository.save(user);</span>
 
     }
 
     @Override
     public UserRole saveRole(UserRole role) {
-<span class="fc" id="L63">        return roleRepository.save(role);</span>
+<span class="fc" id="L66">        return roleRepository.save(role);</span>
     }
 
     @Override
     public void addRoleToUser(String username, String accountType) {
-<span class="fc" id="L68">        UserRole role = roleRepository.findByAccountType(accountType);</span>
-<span class="fc" id="L69">        AstorUser user = userRepository.findByUsername(username);</span>
-<span class="fc" id="L70">        user.getRoles().add(role);</span>
-<span class="fc" id="L71">        userRepository.save(user);</span>
-<span class="fc" id="L72">    }</span>
+<span class="fc" id="L71">        UserRole role = roleRepository.findByAccountType(accountType);</span>
+<span class="fc" id="L72">        AstorUser user = userRepository.findByUsername(username);</span>
+<span class="fc" id="L73">        user.getRoles().add(role);</span>
+<span class="fc" id="L74">        userRepository.save(user);</span>
+<span class="fc" id="L75">    }</span>
+
+    @Override
+    public void deleteRoleToUser(String username, String accountType) {
+<span class="nc" id="L79">        UserRole role = roleRepository.findByAccountType(accountType);</span>
+<span class="nc" id="L80">        AstorUser user  = userRepository.findByUsername(username);</span>
+<span class="nc" id="L81">        user.getRoles().remove(role);</span>
+<span class="nc" id="L82">        userRepository.save(user);</span>
+<span class="nc" id="L83">    }</span>
+
+    @Override
+    public void deleteAllRolesToUser(AstorUser user) {
+       // AstorUser  user = userRepository.findByUsername(username);
+<span class="nc" id="L88">        user.getRoles().clear();</span>
+<span class="nc" id="L89">        userRepository.save(user);</span>
+<span class="nc" id="L90">    }</span>
 
     @Override
     public AstorUser findUserByUsernameOrEmailOrPhone(String name) {
-<span class="nc" id="L76">        return null;</span>
+<span class="nc" id="L94">        return null;</span>
     }
 
     @Override
     public boolean delectAdmin(Long id_admin) {
-<span class="nc" id="L81">        userRepository.deleteById(id_admin);</span>
-<span class="nc" id="L82">        return true;</span>
+<span class="nc" id="L99">        userRepository.deleteById(id_admin);</span>
+<span class="nc" id="L100">        return true;</span>
     }
 
     @Override
     public List&lt;AstorUser&gt; findAllUsers() {
-<span class="nc" id="L87">        return userRepository.findAll();</span>
+<span class="nc" id="L105">        return userRepository.findAll();</span>
     }
+
+    @Override
+    public List&lt;AstorUser&gt; findAllByAccountType(String role) {
+<span class="nc" id="L110">        return roleRepository.findAllByAccountType(role);</span>
+    }
+
+    @Override
+   public List&lt;AstorUser&gt; findAllByRole(String role) {
+<span class="nc" id="L115">        List&lt;AstorUser&gt; userList = userRepository.findAll();</span>
+<span class="nc" id="L116">        List&lt;AstorUser&gt; usersByRole = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">        for (AstorUser user : userList){</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">            if (user.getRoles().contains(roleRepository.findByAccountType(role))){</span>
+<span class="nc" id="L119">                usersByRole.add(user);</span>
+            }
+<span class="nc" id="L121">        }</span>
+<span class="nc" id="L122">     return usersByRole;</span>
+ }
+
+
+    @Override
+    public boolean activateUser(AstorUser user) {
+<span class="nc bnc" id="L128" title="All 2 branches missed.">        if (user.isActive() == true){</span>
+<span class="nc" id="L129">            user.setActive(false);</span>
+<span class="nc" id="L130">            userRepository.save(user);</span>
+<span class="nc" id="L131">            return user.isActive();</span>
+        }else {
+<span class="nc" id="L133">            user.setActive(true);</span>
+<span class="nc" id="L134">            userRepository.save(user);</span>
+<span class="nc" id="L135">            return user.isActive();</span>
+        }
+    }
+
+    @Override
+    public List&lt;UserRole&gt; findallRoles() {
+<span class="nc" id="L141">        return roleRepository.findAll();</span>
+    }
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>
