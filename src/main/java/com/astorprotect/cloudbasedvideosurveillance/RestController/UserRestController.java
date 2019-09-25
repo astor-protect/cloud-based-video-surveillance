@@ -51,7 +51,7 @@ public class UserRestController {
 
 
 
-    /* recuperer l'user connected */
+    /* recuperer l'user connected  requete  à associeré a /login si on ne veut pas exploiter le jwt*/
     @GetMapping("/getUser")
     public AstorUser getUserConnected(Principal principal){
         return serviceAstorUser.findByUsername(principal.getName());
