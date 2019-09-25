@@ -7,6 +7,7 @@ import com.astorprotect.cloudbasedvideosurveillance.Service.ServiceAstorUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 import static java.lang.Boolean.TRUE;
@@ -47,6 +48,17 @@ public class UserRestController {
         emailService.sendSimpleMessage(user.getEmail(), REGISTRATION_SUBJECT,"Thank for coming in");
         return user;
     }
+
+
+
+    /* recuperer l'user connected */
+    @GetMapping("/getUser")
+    public AstorUser getUserConnected(Principal principal){
+        return serviceAstorUser.findByUsername(principal.getName());
+    }
+
+
+
 @GetMapping("getAllUsers")
     public List<AstorUser> findAllUsers(){
         return serviceAstorUser.getAllUsers();
