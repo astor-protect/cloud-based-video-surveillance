@@ -7,6 +7,7 @@ import com.astorprotect.cloudbasedvideosurveillance.Service.ServiceAstorUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 import static java.lang.Boolean.TRUE;
@@ -41,11 +42,23 @@ public class UserRestController {
         user.setPhone(registerForm.getPhone());
         user.setAddress(registerForm.getAddress());
 
+
         serviceAstorUser.saveUser(user);
-        serviceAstorUser.addRoleToUser(registerForm.getUsername(), registerForm.getRole());
+        serviceAstorUser.addRoleToUser(user.getUsername(), registerForm.getRole());
         emailService.sendSimpleMessage(user.getEmail(), REGISTRATION_SUBJECT,"Thank for coming in");
         return user;
     }
+
+
+
+    /* recuperer l'user connected  requete  à associeré a /login si on ne veut pas exploiter le jwt*/
+    @GetMapping("/getUser")
+    public AstorUser getUserConnected(Principal principal){
+        return serviceAstorUser.findByUsername(principal.getName());
+    }
+
+
+
 @GetMapping("getAllUsers")
     public List<AstorUser> findAllUsers(){
         return serviceAstorUser.getAllUsers();
@@ -58,5 +71,10 @@ public class UserRestController {
         return TRUE;
     }
 
+    /* recuperer une liste d users */
+    @GetMapping("getByRole/{role}")
+    public List<AstorUser> findUsersByRole(@PathVariable String role){
+       return serviceAstorUser.findAllByAccountType(role);
+    }
 
 }

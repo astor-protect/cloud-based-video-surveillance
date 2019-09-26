@@ -20,10 +20,11 @@ public class AstorUser implements Serializable {
     private String lastName;
 
     private boolean enabled = false;
+    private boolean active= true;
 
     /* mapping orm */
     @ManyToMany(fetch = FetchType.EAGER)
-    Collection<UserRole> Roles = new ArrayList<>();
+    private Collection<UserRole> Roles = new ArrayList<>();
 
     /* Constructeurs */
 
@@ -118,5 +119,13 @@ public class AstorUser implements Serializable {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

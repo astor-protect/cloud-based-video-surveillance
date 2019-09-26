@@ -8,7 +8,7 @@ https://stackoverflow.com/questions/12030304/why-is-my-travis-ci-build-status-al
 
 https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management
 
-## spring boot failed to deploy to heroku with Travis
+## spring boot failed to deploy to heroku with travis
 
 https://www.google.com/search?q=spring+boot+failed+to+deploy+to+heroku+with+travis&oq=spring+boot+failed+to+deploy+to+heroku+with+travis&aqs=chrome..69i57.104282j0j7&sourceid=chrome&ie=UTF-8
 
