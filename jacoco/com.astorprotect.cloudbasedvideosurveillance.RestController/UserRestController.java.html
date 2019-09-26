@@ -7,6 +7,7 @@ import com.astorprotect.cloudbasedvideosurveillance.Service.ServiceAstorUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 import static java.lang.Boolean.TRUE;
@@ -14,7 +15,7 @@ import static java.lang.Boolean.TRUE;
 @CrossOrigin(&quot;*&quot;)
 @RestController
 
-<span class="fc" id="L17">public class UserRestController {</span>
+<span class="fc" id="L18">public class UserRestController {</span>
     @Autowired
     private ServiceAstorUser serviceAstorUser;
     @Autowired
@@ -23,46 +24,57 @@ import static java.lang.Boolean.TRUE;
 
     @PostMapping(&quot;/inscription&quot;)
     public AstorUser insciption(@RequestBody RegisterForm registerForm) {
-<span class="nc bnc" id="L26" title="All 2 branches missed.">        if (!registerForm.getPassword().equals(registerForm.getRepassword()))</span>
-<span class="nc" id="L27">            throw new RuntimeException(&quot;you must confirm your password&quot;);</span>
+<span class="nc bnc" id="L27" title="All 2 branches missed.">        if (!registerForm.getPassword().equals(registerForm.getRepassword()))</span>
+<span class="nc" id="L28">            throw new RuntimeException(&quot;you must confirm your password&quot;);</span>
 
-<span class="nc" id="L29">        AstorUser astorUser = serviceAstorUser.findByUsername(registerForm.getUsername());</span>
+<span class="nc" id="L30">        AstorUser astorUser = serviceAstorUser.findByUsername(registerForm.getUsername());</span>
 
-<span class="nc bnc" id="L31" title="All 2 branches missed.">        if (astorUser != null) throw new RuntimeException(&quot;This USER already exists&quot;);</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">        if (astorUser != null) throw new RuntimeException(&quot;This USER already exists&quot;);</span>
        // if (registerForm.getRole()==null) throw new RuntimeException(&quot;This USER Not have Role&quot;);
 
-<span class="nc" id="L34">        AstorUser user = new AstorUser();</span>
-<span class="nc" id="L35">        user.setPassword(registerForm.getPassword());</span>
-<span class="nc" id="L36">        user.setUsername(registerForm.getUsername());</span>
+<span class="nc" id="L35">        AstorUser user = new AstorUser();</span>
+<span class="nc" id="L36">        user.setPassword(registerForm.getPassword());</span>
+<span class="nc" id="L37">        user.setUsername(registerForm.getUsername());</span>
 
-<span class="nc" id="L38">        user.setEmail(registerForm.getEmail());</span>
-<span class="nc" id="L39">        user.setFirstName(registerForm.getFirstName());</span>
-<span class="nc" id="L40">        user.setLastName(registerForm.getLastName());</span>
-<span class="nc" id="L41">        user.setPhone(registerForm.getPhone());</span>
-<span class="nc" id="L42">        user.setAddress(registerForm.getAddress());</span>
+<span class="nc" id="L39">        user.setEmail(registerForm.getEmail());</span>
+<span class="nc" id="L40">        user.setFirstName(registerForm.getFirstName());</span>
+<span class="nc" id="L41">        user.setLastName(registerForm.getLastName());</span>
+<span class="nc" id="L42">        user.setPhone(registerForm.getPhone());</span>
+<span class="nc" id="L43">        user.setAddress(registerForm.getAddress());</span>
 
 
-<span class="nc" id="L45">        serviceAstorUser.saveUser(user);</span>
-<span class="nc" id="L46">        serviceAstorUser.addRoleToUser(user.getUsername(), registerForm.getRole());</span>
-<span class="nc" id="L47">        emailService.sendSimpleMessage(user.getEmail(), REGISTRATION_SUBJECT,&quot;Thank for coming in&quot;);</span>
-<span class="nc" id="L48">        return user;</span>
+<span class="nc" id="L46">        serviceAstorUser.saveUser(user);</span>
+<span class="nc" id="L47">        serviceAstorUser.addRoleToUser(user.getUsername(), registerForm.getRole());</span>
+<span class="nc" id="L48">        emailService.sendSimpleMessage(user.getEmail(), REGISTRATION_SUBJECT,&quot;Thank for coming in&quot;);</span>
+<span class="nc" id="L49">        return user;</span>
     }
+
+
+
+    /* recuperer l'user connected  requete  à associeré a /login si on ne veut pas exploiter le jwt*/
+    @GetMapping(&quot;/getUser&quot;)
+    public AstorUser getUserConnected(Principal principal){
+<span class="nc" id="L57">        return serviceAstorUser.findByUsername(principal.getName());</span>
+    }
+
+
+
 @GetMapping(&quot;getAllUsers&quot;)
     public List&lt;AstorUser&gt; findAllUsers(){
-<span class="nc" id="L52">        return serviceAstorUser.getAllUsers();</span>
+<span class="nc" id="L64">        return serviceAstorUser.getAllUsers();</span>
 }
 
 /* Test envoi  simple d'email */
     @RequestMapping(value = &quot;envoi&quot;,method = RequestMethod.GET)
     public Boolean createMail(){
-<span class="nc" id="L58">        emailService.sendSimpleMessage(&quot;jokayam95@gmail.com&quot;,&quot;TEST EMAIL ASTOR&quot;, &quot;Ceci  est un exercice.&quot;);</span>
-<span class="nc" id="L59">        return TRUE;</span>
+<span class="nc" id="L70">        emailService.sendSimpleMessage(&quot;jokayam95@gmail.com&quot;,&quot;TEST EMAIL ASTOR&quot;, &quot;Ceci  est un exercice.&quot;);</span>
+<span class="nc" id="L71">        return TRUE;</span>
     }
 
     /* recuperer une liste d users */
     @GetMapping(&quot;getByRole/{role}&quot;)
     public List&lt;AstorUser&gt; findUsersByRole(@PathVariable String role){
-<span class="nc" id="L65">       return serviceAstorUser.findAllByAccountType(role);</span>
+<span class="nc" id="L77">       return serviceAstorUser.findAllByAccountType(role);</span>
     }
 
 }
