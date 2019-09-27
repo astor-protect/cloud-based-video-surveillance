@@ -34,6 +34,12 @@ public class AdminRestController {
         return userList;
     }
 
+    @GetMapping("findByRole/")
+    public List<AstorUser> findUsersByRole(){
+        return serviceAstorUser.findAllByRole("ADMIN");
+    }
+
+
     /* A2 changer le type de compte d'un Utilisateur */
     @PostMapping(value = "/changeAccountType")
     public AstorUser changeAccountType(@RequestBody ChangeAccountTypeForm changeAccountTypeForm){
