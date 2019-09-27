@@ -96,49 +96,67 @@ import java.util.List;
 
     @Override
     public boolean delectAdmin(Long id_admin) {
-<span class="nc" id="L99">        userRepository.deleteById(id_admin);</span>
-<span class="nc" id="L100">        return true;</span>
+<span class="nc" id="L99">        AstorUser user=userRepository.findByIduser(id_admin);</span>
+<span class="nc" id="L100">        List&lt;UserRole&gt;  role=user.getRoles();</span>
+<span class="nc bnc" id="L101" title="All 2 branches missed.">        if (role.get(0).getAccountType().equalsIgnoreCase(&quot;ADMIN&quot;)){</span>
+<span class="nc" id="L102">            userRepository.deleteById(id_admin);</span>
+<span class="nc" id="L103">        return true;</span>
+        }else {
+<span class="nc" id="L105">            return false;</span>
+        }
+    }
+
+    @Override
+    public boolean delectUser(Long id_user) {
+<span class="nc" id="L111">        AstorUser user=userRepository.findByIduser(id_user);</span>
+<span class="nc" id="L112">        List&lt;UserRole&gt;  role=user.getRoles();</span>
+<span class="nc bnc" id="L113" title="All 2 branches missed.">        if (role.get(0).getAccountType().equalsIgnoreCase(&quot;USER&quot;)){</span>
+<span class="nc" id="L114">            userRepository.deleteById(id_user);</span>
+<span class="nc" id="L115">            return true;</span>
+        }else {
+<span class="nc" id="L117">            return false;</span>
+        }
     }
 
     @Override
     public List&lt;AstorUser&gt; findAllUsers() {
-<span class="nc" id="L105">        return userRepository.findAll();</span>
+<span class="nc" id="L123">        return userRepository.findAll();</span>
     }
 
     @Override
     public List&lt;AstorUser&gt; findAllByAccountType(String role) {
-<span class="nc" id="L110">        return roleRepository.findAllByAccountType(role);</span>
+<span class="nc" id="L128">        return roleRepository.findAllByAccountType(role);</span>
     }
 
     @Override
    public List&lt;AstorUser&gt; findAllByRole(String role) {
-<span class="nc" id="L115">        List&lt;AstorUser&gt; userList = userRepository.findAll();</span>
-<span class="nc" id="L116">        List&lt;AstorUser&gt; usersByRole = new ArrayList&lt;&gt;();</span>
-<span class="nc bnc" id="L117" title="All 2 branches missed.">        for (AstorUser user : userList){</span>
-<span class="nc bnc" id="L118" title="All 2 branches missed.">            if (user.getRoles().contains(roleRepository.findByAccountType(role))){</span>
-<span class="nc" id="L119">                usersByRole.add(user);</span>
+<span class="nc" id="L133">        List&lt;AstorUser&gt; userList = userRepository.findAll();</span>
+<span class="nc" id="L134">        List&lt;AstorUser&gt; usersByRole = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L135" title="All 2 branches missed.">        for (AstorUser user : userList){</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">            if (user.getRoles().contains(roleRepository.findByAccountType(role))){</span>
+<span class="nc" id="L137">                usersByRole.add(user);</span>
             }
-<span class="nc" id="L121">        }</span>
-<span class="nc" id="L122">     return usersByRole;</span>
+<span class="nc" id="L139">        }</span>
+<span class="nc" id="L140">     return usersByRole;</span>
  }
 
 
     @Override
     public boolean activateUser(AstorUser user) {
-<span class="nc bnc" id="L128" title="All 2 branches missed.">        if (user.isActive() == true){</span>
-<span class="nc" id="L129">            user.setActive(false);</span>
-<span class="nc" id="L130">            userRepository.save(user);</span>
-<span class="nc" id="L131">            return user.isActive();</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">        if (user.isActive() == true){</span>
+<span class="nc" id="L147">            user.setActive(false);</span>
+<span class="nc" id="L148">            userRepository.save(user);</span>
+<span class="nc" id="L149">            return user.isActive();</span>
         }else {
-<span class="nc" id="L133">            user.setActive(true);</span>
-<span class="nc" id="L134">            userRepository.save(user);</span>
-<span class="nc" id="L135">            return user.isActive();</span>
+<span class="nc" id="L151">            user.setActive(true);</span>
+<span class="nc" id="L152">            userRepository.save(user);</span>
+<span class="nc" id="L153">            return user.isActive();</span>
         }
     }
 
     @Override
     public List&lt;UserRole&gt; findallRoles() {
-<span class="nc" id="L141">        return roleRepository.findAll();</span>
+<span class="nc" id="L159">        return roleRepository.findAll();</span>
     }
 
 }

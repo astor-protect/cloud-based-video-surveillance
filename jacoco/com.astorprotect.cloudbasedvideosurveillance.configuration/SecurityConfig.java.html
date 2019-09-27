@@ -39,19 +39,20 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
      /* access rights accorder pour tout 09-09-2019*/
 <span class="fc" id="L40">        security.authorizeRequests().antMatchers(&quot;/login/**&quot;,&quot;/**&quot;).permitAll();</span>
 <span class="fc" id="L41">        security.authorizeRequests().antMatchers(&quot;/supadmin/**&quot;).hasAnyAuthority(&quot;SUPER ADMIN&quot;);</span>
-<span class="fc" id="L42">        security.authorizeRequests().anyRequest().authenticated();</span>
+<span class="fc" id="L42">        security.authorizeRequests().antMatchers(&quot;/admin/**&quot;).hasAnyAuthority(&quot;ADMIN&quot;);</span>
+<span class="fc" id="L43">        security.authorizeRequests().anyRequest().authenticated();</span>
 
-<span class="fc" id="L44">      security.addFilter(new JWTauthentificationFilter(authenticationManager()));</span>
-<span class="fc" id="L45">      security.addFilterBefore(new JWTauthorizationFilter(), UsernamePasswordAuthenticationFilter.class);</span>
+<span class="fc" id="L45">      security.addFilter(new JWTauthentificationFilter(authenticationManager()));</span>
+<span class="fc" id="L46">      security.addFilterBefore(new JWTauthorizationFilter(), UsernamePasswordAuthenticationFilter.class);</span>
 
-<span class="fc" id="L47">    }</span>
+<span class="fc" id="L48">    }</span>
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
 	    /* Le systeme d'authentification base sur les services UserDetailService qui a des methodes pour l implementer ce service */
-<span class="fc" id="L52">	    auth.userDetailsService(userDetailsService)</span>
-<span class="fc" id="L53">                .passwordEncoder(bCryptPasswordEncoder);// Hachage de mot de passe pour harmoniser avec celui de Bd</span>
-<span class="fc" id="L54">    }</span>
+<span class="fc" id="L53">	    auth.userDetailsService(userDetailsService)</span>
+<span class="fc" id="L54">                .passwordEncoder(bCryptPasswordEncoder);// Hachage de mot de passe pour harmoniser avec celui de Bd</span>
+<span class="fc" id="L55">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>
