@@ -1,10 +1,12 @@
 package com.astorprotect.cloudbasedvideosurveillance.RestController;
 
+import com.astorprotect.cloudbasedvideosurveillance.Model.APIForms.ChangeAccountTypeForm;
 import com.astorprotect.cloudbasedvideosurveillance.Model.AstorUser;
 import com.astorprotect.cloudbasedvideosurveillance.Model.RegisterForm;
 import com.astorprotect.cloudbasedvideosurveillance.Service.EmailService;
 import com.astorprotect.cloudbasedvideosurveillance.Service.ServiceAstorUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -51,9 +53,10 @@ public class UserRestController {
 
 
 
-    /* recuperer l'user connected  requete  à associeré a /login si on ne veut pas exploiter le jwt*/
+    /* recuperer l'user connected  requete  à associer a /login si on ne veut pas exploiter le jwt    */
     @GetMapping("/getUser")
     public AstorUser getUserConnected(Principal principal){
+
         return serviceAstorUser.findByUsername(principal.getName());
     }
 
