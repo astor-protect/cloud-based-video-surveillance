@@ -96,8 +96,26 @@ public class ServiceAstorUserImpl implements ServiceAstorUser {
 
     @Override
     public boolean delectAdmin(Long id_admin) {
-        userRepository.deleteById(id_admin);
+        AstorUser user=userRepository.findByIduser(id_admin);
+        List<UserRole>  role=user.getRoles();
+        if (role.get(0).getAccountType().equalsIgnoreCase("ADMIN")){
+            userRepository.deleteById(id_admin);
         return true;
+        }else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean delectUser(Long id_user) {
+        AstorUser user=userRepository.findByIduser(id_user);
+        List<UserRole>  role=user.getRoles();
+        if (role.get(0).getAccountType().equalsIgnoreCase("USER")){
+            userRepository.deleteById(id_user);
+            return true;
+        }else {
+            return false;
+        }
     }
 
     @Override

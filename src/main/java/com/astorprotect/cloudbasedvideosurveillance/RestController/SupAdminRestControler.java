@@ -45,19 +45,11 @@ public class SupAdminRestControler {
         user.setAddress(registerForm.getAddress());
 
         serviceAstorUser.saveUser(user);
-        serviceAstorUser.addRoleToUser(registerForm.getUsername(), registerForm.getRole());
+        serviceAstorUser.addRoleToUser(registerForm.getUsername(), "ADMIN");
         emailService.sendSimpleMessage(user.getEmail(), REGISTRATION_SUBJECT,"Thank for coming IN");
         return user;
     }
-    /* A2 changer le type de compte d'un Utilisateur */
-    @PostMapping(value = "/changeAccountType")
-    public AstorUser changeAccountType(@RequestBody ChangeAccountTypeForm changeAccountTypeForm){
-        AstorUser user = serviceAstorUser.findByUsername(changeAccountTypeForm.getUsername());
-        serviceAstorUser.deleteAllRolesToUser(user);
-        serviceAstorUser.addRoleToUser(user.getUsername(),changeAccountTypeForm.getAccountType());
-        return user;
 
-    }
     /*
     * A2 lister tous les comptes enregistrés sur la plateforme */
     @GetMapping("getAllUsers")
@@ -65,9 +57,10 @@ public class SupAdminRestControler {
         return serviceAstorUser.getAllUsers();
     }
     /* chercher les users selon le type de compte */
-   @GetMapping("findByRole/{accountType}")
-    public List<AstorUser> findUsersByRole(@PathVariable String accountType){
-        return serviceAstorUser.findAllByRole(accountType);
+
+    @GetMapping("findByRole/")
+    public List<AstorUser> findUsersByRole(){
+        return serviceAstorUser.findAllByRole("ADMIN");
     }
 
     @GetMapping("/findByAccount/{accountType}")
@@ -85,6 +78,7 @@ public class SupAdminRestControler {
     boolean delectUser(@PathVariable Long id_user){
         return serviceAstorUser.delectAdmin(id_user);
     }
+
     @PutMapping("/activeUser/{id_user}")
     boolean activateUser(@PathVariable Long id_user){
         AstorUser user = serviceAstorUser.findById(id_user);

@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class AstorUser implements Serializable {
@@ -24,7 +25,7 @@ public class AstorUser implements Serializable {
 
     /* mapping orm */
     @ManyToMany(fetch = FetchType.EAGER)
-    private Collection<UserRole> Roles = new ArrayList<>();
+    private List<UserRole> Roles = new ArrayList<>();
 
     /* Constructeurs */
 
@@ -89,11 +90,11 @@ public class AstorUser implements Serializable {
         this.password = password;
     }
 
-    public Collection<UserRole> getRoles() {
+    public List<UserRole> getRoles() {
         return Roles;
     }
 
-    public void setRoles(Collection<UserRole> roles) {
+    public void setRoles(List<UserRole> roles) {
         Roles = roles;
     }
 

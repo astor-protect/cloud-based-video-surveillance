@@ -39,6 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      /* access rights accorder pour tout 09-09-2019*/
         security.authorizeRequests().antMatchers("/login/**","/**").permitAll();
         security.authorizeRequests().antMatchers("/supadmin/**").hasAnyAuthority("SUPER ADMIN");
+        security.authorizeRequests().antMatchers("/admin/**").hasAnyAuthority("ADMIN");
         security.authorizeRequests().anyRequest().authenticated();
 
       security.addFilter(new JWTauthentificationFilter(authenticationManager()));

@@ -22,6 +22,7 @@ public interface ServiceAstorUser {
     void addRoleToUser(String username, String accountType);
     AstorUser findUserByUsernameOrEmailOrPhone(String name);
     boolean delectAdmin(Long id_admin);
+    boolean delectUser(Long id_admin);
 
     List<AstorUser> findAllByAccountType(String role);
     List<AstorUser> findAllByRole(String role);
