@@ -34,9 +34,11 @@ public class AdminRestController {
         return userList;
     }
 
-    @GetMapping("findByRole/")
-    public List<AstorUser> findUsersByRole(){
-        return serviceAstorUser.findAllByRole("ADMIN");
+    @GetMapping("findByRole/{accountType}")
+    public List<AstorUser> findUsersByRole(@PathVariable String accountType){
+        if (accountType.equalsIgnoreCase("SUPER ADMIN")){
+        return serviceAstorUser.findAllByRole(accountType);
+        }else return null;
     }
 
 
@@ -44,13 +46,16 @@ public class AdminRestController {
     @PostMapping(value = "/changeAccountType")
     public AstorUser changeAccountType(@RequestBody ChangeAccountTypeForm changeAccountTypeForm){
         AstorUser user = serviceAstorUser.findByUsername(changeAccountTypeForm.getUsername());
+
         System.out.println("l'utilisateur est : "+user.getUsername());
-        serviceAstorUser.deleteAllRolesToUser(user);
+       if (user.getRoles().get(0).getAccountType().equals("SUPER ADMIN")){
+           serviceAstorUser.deleteAllRolesToUser(user);
         serviceAstorUser.addRoleToUser(user.getUsername(),changeAccountTypeForm.getAccountType());
+       }
         return user;
 
     }
-    @DeleteMapping("/delect_user/{id_user}")
+    @DeleteMapping("/delete_user/{id_user}")
     boolean delectUser(@PathVariable Long id_user){
         return serviceAstorUser.delectUser(id_user);
     }
