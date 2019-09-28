@@ -5,9 +5,9 @@ cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.Mode
 cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.EmailConfig,MyConstants,3,0,0,0,1,0,1,0,1,0
 cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.EmailConfig,MailObject,24,0,0,0,10,0,7,0,7,0
 cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.EmailConfig,MailConfig,0,44,0,0,0,12,0,2,0,2
-cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.RestController,AdminRestController,131,3,10,0,22,1,10,1,5,1
+cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.RestController,AdminRestController,116,3,6,0,19,1,8,1,5,1
 cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.RestController,UserRestController,100,3,4,0,21,1,7,1,5,1
-cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.RestController,SupAdminRestControler,94,3,6,0,19,1,6,1,3,1
+cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.RestController,SupAdminRestControler,125,3,6,0,26,1,11,1,8,1
 cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.configuration,SecurityConstant,3,0,0,0,1,0,1,0,1,0
 cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.configuration,JWTauthorizationFilter,89,3,6,0,22,1,5,1,2,1
 cloud-based-video-surveillance,com.astorprotect.cloudbasedvideosurveillance.configuration,SecurityConfig,0,103,0,0,0,15,0,3,0,3

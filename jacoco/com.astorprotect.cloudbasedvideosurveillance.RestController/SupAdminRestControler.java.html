@@ -51,44 +51,44 @@ import static java.lang.Boolean.TRUE;
     }
 
     /*
-  //  * A2 lister tous les comptes enregistrés sur la plateforme */
-   // @GetMapping(&quot;getAllUsers&quot;)
-   // public List&lt;AstorUser&gt; findAllUsers(){
-   //     return serviceAstorUser.getAllUsers();
-   // }
+    * A2 lister tous les comptes enregistrés sur la plateforme */
+    @GetMapping(&quot;getAllUsers&quot;)
+    public List&lt;AstorUser&gt; findAllUsers(){
+<span class="nc" id="L57">        return serviceAstorUser.getAllUsers();</span>
+    }
     /* chercher les users selon le type de compte */
 
-    @GetMapping(&quot;findByRole/ADMIN&quot;)
+    @GetMapping(&quot;findByRole/&quot;)
     public List&lt;AstorUser&gt; findUsersByRole(){
 <span class="nc" id="L63">        return serviceAstorUser.findAllByRole(&quot;ADMIN&quot;);</span>
     }
 
-  //  @GetMapping(&quot;/findByAccount/{accountType}&quot;)
-    //public List&lt;AstorUser&gt; findUsersByAccountType(@PathVariable String accountType){
-    //    return serviceAstorUser.findAllByAccountType(accountType);
-    //}
+    @GetMapping(&quot;/findByAccount/{accountType}&quot;)
+    public List&lt;AstorUser&gt; findUsersByAccountType(@PathVariable String accountType){
+<span class="nc" id="L68">        return serviceAstorUser.findAllByAccountType(accountType);</span>
+    }
     /* Test envoi  simple d'email */
-   // @RequestMapping(value = &quot;envoi&quot;,method = RequestMethod.GET)
-    //public Boolean createMail(){
-    //    emailService.sendSimpleMessage(&quot;jokayam95@gmail.com&quot;,&quot;TEST EMAIL ASTOR&quot;, &quot;Ceci  est un exercice.&quot;);
-    //    return TRUE;
-    //}
+    @RequestMapping(value = &quot;envoi&quot;,method = RequestMethod.GET)
+    public Boolean createMail(){
+<span class="nc" id="L73">        emailService.sendSimpleMessage(&quot;jokayam95@gmail.com&quot;,&quot;TEST EMAIL ASTOR&quot;, &quot;Ceci  est un exercice.&quot;);</span>
+<span class="nc" id="L74">        return TRUE;</span>
+    }
 /* A2 supprimer un Utilisateur  activer desactiver*/
-    @DeleteMapping(&quot;/delete_admin/{id_admin}&quot;)
+    @DeleteMapping(&quot;/delect_user/{id_user}&quot;)
     boolean delectUser(@PathVariable Long id_user){
 <span class="nc" id="L79">        return serviceAstorUser.delectAdmin(id_user);</span>
     }
 
-  //  @PutMapping(&quot;/activeUser/{id_user}&quot;)
-    //boolean activateUser(@PathVariable Long id_user){
-      //  AstorUser user = serviceAstorUser.findById(id_user);
-        //return serviceAstorUser.activateUser(user);
-    //}
+    @PutMapping(&quot;/activeUser/{id_user}&quot;)
+    boolean activateUser(@PathVariable Long id_user){
+<span class="nc" id="L84">        AstorUser user = serviceAstorUser.findById(id_user);</span>
+<span class="nc" id="L85">        return serviceAstorUser.activateUser(user);</span>
+    }
 /**/
-   // @GetMapping(&quot;roles&quot;)
-   // public List&lt;UserRole&gt; AllRoles(){
- //       return serviceAstorUser.findallRoles();
-   // }
+    @GetMapping(&quot;roles&quot;)
+    public List&lt;UserRole&gt; AllRoles(){
+<span class="nc" id="L90">        return serviceAstorUser.findallRoles();</span>
+    }
 
 
 }
