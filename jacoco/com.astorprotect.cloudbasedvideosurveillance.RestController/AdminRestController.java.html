@@ -34,32 +34,37 @@ import java.util.List;
 <span class="nc" id="L34">        return userList;</span>
     }
 
-    @GetMapping(&quot;findByRole/&quot;)
-    public List&lt;AstorUser&gt; findUsersByRole(){
-<span class="nc" id="L39">        return serviceAstorUser.findAllByRole(&quot;ADMIN&quot;);</span>
+    @GetMapping(&quot;findByRole/{accountType}&quot;)
+    public List&lt;AstorUser&gt; findUsersByRole(@PathVariable String accountType){
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        if (accountType.equalsIgnoreCase(&quot;SUPER ADMIN&quot;)){</span>
+<span class="nc" id="L40">        return serviceAstorUser.findAllByRole(accountType);</span>
+<span class="nc" id="L41">        }else return null;</span>
     }
 
 
     /* A2 changer le type de compte d'un Utilisateur */
     @PostMapping(value = &quot;/changeAccountType&quot;)
     public AstorUser changeAccountType(@RequestBody ChangeAccountTypeForm changeAccountTypeForm){
-<span class="nc" id="L46">        AstorUser user = serviceAstorUser.findByUsername(changeAccountTypeForm.getUsername());</span>
-<span class="nc" id="L47">        System.out.println(&quot;l'utilisateur est : &quot;+user.getUsername());</span>
-<span class="nc" id="L48">        serviceAstorUser.deleteAllRolesToUser(user);</span>
-<span class="nc" id="L49">        serviceAstorUser.addRoleToUser(user.getUsername(),changeAccountTypeForm.getAccountType());</span>
-<span class="nc" id="L50">        return user;</span>
+<span class="nc" id="L48">        AstorUser user = serviceAstorUser.findByUsername(changeAccountTypeForm.getUsername());</span>
+
+<span class="nc" id="L50">        System.out.println(&quot;l'utilisateur est : &quot;+user.getUsername());</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">       if (user.getRoles().get(0).getAccountType().equals(&quot;SUPER ADMIN&quot;)){</span>
+<span class="nc" id="L52">           serviceAstorUser.deleteAllRolesToUser(user);</span>
+<span class="nc" id="L53">        serviceAstorUser.addRoleToUser(user.getUsername(),changeAccountTypeForm.getAccountType());</span>
+       }
+<span class="nc" id="L55">        return user;</span>
 
     }
-    @DeleteMapping(&quot;/delect_user/{id_user}&quot;)
+    @DeleteMapping(&quot;/delete_user/{id_user}&quot;)
     boolean delectUser(@PathVariable Long id_user){
-<span class="nc" id="L55">        return serviceAstorUser.delectUser(id_user);</span>
+<span class="nc" id="L60">        return serviceAstorUser.delectUser(id_user);</span>
     }
 
 
     @PutMapping(&quot;/activeUser/{id_user}&quot;)
     boolean activateUser(@PathVariable Long id_user){
-<span class="nc" id="L61">        AstorUser user = serviceAstorUser.findById(id_user);</span>
-<span class="nc" id="L62">        return serviceAstorUser.activateUser(user);</span>
+<span class="nc" id="L66">        AstorUser user = serviceAstorUser.findById(id_user);</span>
+<span class="nc" id="L67">        return serviceAstorUser.activateUser(user);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>
