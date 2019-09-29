@@ -51,44 +51,44 @@ public class SupAdminRestControler {
     }
 
     /*
-    * A2 lister tous les comptes enregistrés sur la plateforme */
-    @GetMapping("getAllUsers")
-    public List<AstorUser> findAllUsers(){
-        return serviceAstorUser.getAllUsers();
-    }
+  //  * A2 lister tous les comptes enregistrés sur la plateforme */
+   // @GetMapping("getAllUsers")
+   // public List<AstorUser> findAllUsers(){
+   //     return serviceAstorUser.getAllUsers();
+   // }
     /* chercher les users selon le type de compte */
 
-    @GetMapping("findByRole/")
+    @GetMapping("findByRole/ADMIN")
     public List<AstorUser> findUsersByRole(){
         return serviceAstorUser.findAllByRole("ADMIN");
     }
 
-    @GetMapping("/findByAccount/{accountType}")
-    public List<AstorUser> findUsersByAccountType(@PathVariable String accountType){
-        return serviceAstorUser.findAllByAccountType(accountType);
-    }
+  //  @GetMapping("/findByAccount/{accountType}")
+    //public List<AstorUser> findUsersByAccountType(@PathVariable String accountType){
+    //    return serviceAstorUser.findAllByAccountType(accountType);
+    //}
     /* Test envoi  simple d'email */
-    @RequestMapping(value = "envoi",method = RequestMethod.GET)
-    public Boolean createMail(){
-        emailService.sendSimpleMessage("jokayam95@gmail.com","TEST EMAIL ASTOR", "Ceci  est un exercice.");
-        return TRUE;
-    }
+   // @RequestMapping(value = "envoi",method = RequestMethod.GET)
+    //public Boolean createMail(){
+    //    emailService.sendSimpleMessage("jokayam95@gmail.com","TEST EMAIL ASTOR", "Ceci  est un exercice.");
+    //    return TRUE;
+    //}
 /* A2 supprimer un Utilisateur  activer desactiver*/
-    @DeleteMapping("/delect_user/{id_user}")
+    @DeleteMapping("/delete_admin/{id_admin}")
     boolean delectUser(@PathVariable Long id_user){
         return serviceAstorUser.delectAdmin(id_user);
     }
 
-    @PutMapping("/activeUser/{id_user}")
-    boolean activateUser(@PathVariable Long id_user){
-        AstorUser user = serviceAstorUser.findById(id_user);
-        return serviceAstorUser.activateUser(user);
-    }
+  //  @PutMapping("/activeUser/{id_user}")
+    //boolean activateUser(@PathVariable Long id_user){
+      //  AstorUser user = serviceAstorUser.findById(id_user);
+        //return serviceAstorUser.activateUser(user);
+    //}
 /**/
-    @GetMapping("roles")
-    public List<UserRole> AllRoles(){
-        return serviceAstorUser.findallRoles();
-    }
+   // @GetMapping("roles")
+   // public List<UserRole> AllRoles(){
+ //       return serviceAstorUser.findallRoles();
+   // }
 
 
 }
